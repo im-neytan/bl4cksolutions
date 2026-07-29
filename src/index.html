@@ -1,223 +1,211 @@
 <!DOCTYPE html>
-<html lang="pt-PT">
+<html lang="pt-MZ">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>bl4cksolutions | Internet, Bots & Serviços Digitais</title>
+  <title>BL4CK SOLLUTIONS</title>
   
-  <!-- SEO Tags para o Google -->
-  <meta name="description" content="Plataforma oficial da bl4cksolutions. Adquira pacotes de internet Vodacom, bots para WhatsApp e contas de streaming.">
-  <meta name="keywords" content="bl4cksolutions, black solutions, vodacom mozambique, megabytes vodacom, bots whatsapp, netflix">
-
-  <!-- Tailwind CSS via CDN -->
+  <!-- Tailwind CSS & Lucide Icons -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
-  
+
   <style>
-    body {
-      background-color: #0b0f17;
-      color: #f3f4f6;
-      font-family: 'Inter', sans-serif;
-    }
     .glass-card {
       background: rgba(17, 24, 39, 0.7);
       backdrop-filter: blur(12px);
       border: 1px solid rgba(255, 255, 255, 0.08);
     }
-    .glow-red:hover {
-      box-shadow: 0 0 20px rgba(239, 68, 68, 0.3);
-      border-color: rgba(239, 68, 68, 0.5);
-    }
   </style>
 </head>
-<body class="min-h-screen flex flex-col justify-between">
+<body class="bg-gray-950 text-gray-100 min-h-screen flex flex-col font-sans selection:bg-red-600 selection:text-white">
 
-  <!-- Header / Navbar -->
-  <header class="sticky top-0 z-50 glass-card border-b border-gray-800">
-    <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-      <div class="flex items-center gap-3">
-        <span class="text-2xl font-black tracking-wider text-white">bl4ck<span class="text-red-500">solutions</span></span>
-        <span class="hidden sm:inline-block bg-green-500/10 text-green-400 text-xs px-2.5 py-1 rounded-full border border-green-500/20 font-medium">
-          ● Atendimento Automático 24/7
-        </span>
-      </div>
+  <!-- ==================== CABEÇALHO & NAVEGAÇÃO ==================== -->
+  <header class="border-b border-gray-800 bg-gray-900/60 backdrop-blur-md sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between h-16">
       
-      <a href="https://wa.me/258857695766" target="_blank" class="bg-red-600 hover:bg-red-700 text-white font-semibold px-4 py-2 rounded-lg text-sm transition flex items-center gap-2">
-        <i data-lucide="message-square"></i> Suporte WhatsApp
-      </a>
+      <!-- Logo / Nome -->
+      <div class="flex items-center gap-2">
+        <div class="w-8 h-8 rounded-lg bg-red-600 flex items-center justify-center font-black text-white text-lg">B</div>
+        <span class="font-bold text-lg tracking-wider text-white">BL4CK<span class="text-red-500">_SOLLUTIONS</span></span>
+      </div>
+
+      <!-- Links das Abas -->
+      <nav class="flex items-center gap-1 sm:gap-2">
+        <button onclick="switchTab('vodacom')" id="btn-vodacom" class="tab-btn px-3 py-2 rounded-xl text-xs sm:text-sm font-semibold transition flex items-center gap-1.5 bg-red-600/20 text-red-400 border border-red-600/30">
+          <i data-lucide="wifi" class="w-4 h-4"></i> Vodacom
+        </button>
+        <button onclick="switchTab('bot')" id="btn-bot" class="tab-btn px-3 py-2 rounded-xl text-xs sm:text-sm font-semibold transition flex items-center gap-1.5 text-gray-400 hover:text-white hover:bg-gray-800">
+          <i data-lucide="bot" class="w-4 h-4"></i> BL4CK BOT
+        </button>
+        <button onclick="switchTab('historico')" id="btn-historico" class="tab-btn px-3 py-2 rounded-xl text-xs sm:text-sm font-semibold transition flex items-center gap-1.5 text-gray-400 hover:text-white hover:bg-gray-800">
+          <i data-lucide="history" class="w-4 h-4"></i> Histórico
+        </button>
+        <button onclick="switchTab('pendentes')" id="btn-pendentes" class="tab-btn px-3 py-2 rounded-xl text-xs sm:text-sm font-semibold transition flex items-center gap-1.5 text-gray-400 hover:text-white hover:bg-gray-800">
+          <i data-lucide="clock" class="w-4 h-4"></i> Pendentes
+        </button>
+      </nav>
+
     </div>
   </header>
 
-  <!-- Hero Section -->
-  <section class="max-w-5xl mx-auto px-4 pt-12 pb-6 text-center">
-    <h1 class="text-4xl md:text-6xl font-extrabold text-white tracking-tight mb-4">
-      Soluções Digitais & <span class="text-red-500">Internet Rápida</span>
-    </h1>
-    <p class="text-gray-400 text-base md:text-lg max-w-2xl mx-auto mb-8">
-      Sua central completa para bots de WhatsApp, dados Vodacom e contas premium de streaming.
-    </p>
+  <!-- ==================== CONTEÚDO PRINCIPAL ==================== -->
+  <div class="flex-1 flex flex-col">
 
-    <!-- Barra de Pesquisa Interativa -->
-    <div class="relative max-w-xl mx-auto mb-6">
-      <i data-lucide="search" class="absolute left-4 top-3.5 text-gray-500 w-5 h-5"></i>
-      <input 
-        type="text" 
-        id="searchInput" 
-        placeholder="Pesquisar serviço (ex: Vodacom, Bot, Netflix...)" 
-        onkeyup="filtrarServicos()"
-        class="w-full pl-12 pr-4 py-3 bg-gray-900 border border-gray-800 rounded-xl focus:outline-none focus:border-red-500 text-white placeholder-gray-500 transition"
-      >
-    </div>
-
-    <!-- Filtros de Categoria -->
-    <div class="flex flex-wrap justify-center gap-2" id="filterButtons">
-      <button onclick="filtrarCategoria('todos')" class="filter-btn active bg-red-600 text-white px-4 py-1.5 rounded-lg text-sm font-medium transition">Todos</button>
-      <button onclick="filtrarCategoria('vodacom')" class="filter-btn bg-gray-800 text-gray-300 hover:bg-gray-700 px-4 py-1.5 rounded-lg text-sm font-medium transition">Vodacom / Dados</button>
-      <button onclick="filtrarCategoria('bots')" class="filter-btn bg-gray-800 text-gray-300 hover:bg-gray-700 px-4 py-1.5 rounded-lg text-sm font-medium transition">Bots WhatsApp</button>
-      <button onclick="filtrarCategoria('streaming')" class="filter-btn bg-gray-800 text-gray-300 hover:bg-gray-700 px-4 py-1.5 rounded-lg text-sm font-medium transition">Streaming & Perfis</button>
-    </div>
-  </section>
-
-  <!-- Grid de Serviços -->
-  <main class="max-w-7xl mx-auto px-4 py-8 flex-1 w-full">
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="servicesGrid">
-      
-      <!-- Card: Internet Vodacom -->
-      <div class="card glass-card rounded-2xl p-6 glow-red transition duration-300" data-category="vodacom" data-name="internet dados megabytes vodacom recarga mpesa emola">
-        <div class="flex justify-between items-start mb-4">
-          <div class="bg-red-500/10 p-3 rounded-xl border border-red-500/20 text-red-500">
-            <i data-lucide="wifi"></i>
+    <!-- ==================== TELA VODACOM (MEGAS) ==================== -->
+    <main id="tab-content-vodacom" class="tab-page flex-1 max-w-7xl mx-auto px-4 sm:px-6 py-8 w-full">
+      <div class="max-w-4xl mx-auto">
+        
+        <!-- Header da Página -->
+        <div class="flex items-center gap-3 mb-6">
+          <div class="w-12 h-12 rounded-2xl bg-red-600/10 border border-red-600/20 text-red-500 flex items-center justify-center">
+            <i data-lucide="wifi" class="w-6 h-6"></i>
           </div>
-          <span class="text-xs font-semibold bg-red-950/80 text-red-400 border border-red-800 px-2.5 py-1 rounded-md">Vodacom</span>
-        </div>
-        <h3 class="text-xl font-bold text-white mb-2">Megabytes Vodacom</h3>
-        <p class="text-gray-400 text-sm mb-4">Pacotes de dados e saldo Vodacom com transferência imediata via M-Pesa / e-Mola.</p>
-        <div class="flex justify-between items-center pt-4 border-t border-gray-800">
           <div>
-            <span class="text-xs text-gray-500 block">Envio</span>
-            <span class="text-lg font-bold text-green-400">Imediato</span>
+            <h2 class="text-2xl sm:text-3xl font-bold text-white">Pacotes Vodacom & Diamante+</h2>
+            <p class="text-gray-400 text-sm">Ativação imediata após pagamento via M-Pesa, e-Mola ou Millennium bim</p>
           </div>
-          <button onclick="abrirModal('Megabytes Vodacom', 'Escolha a quantidade de MB/GB desejada e receba diretamente no seu número Vodacom.')" class="bg-gray-800 hover:bg-red-600 text-white font-medium px-4 py-2 rounded-lg text-sm transition">
-            Comprar Dados
-          </button>
+        </div>
+
+        <!-- Container das Imagens JPG das Tabelas -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+          
+          <!-- Tabela 1: Megabytes (.jpg) -->
+          <div class="glass-card rounded-2xl p-4 text-center">
+            <h3 class="text-sm font-semibold text-gray-300 uppercase tracking-wider mb-3">Tabela de Megabytes</h3>
+            <img src="tabela-megas.jpg" alt="Tabela Vodacom Megabytes" class="w-full h-auto rounded-xl shadow-2xl border border-gray-800 object-cover">
+          </div>
+
+          <!-- Tabela 2: Chamadas & Diamante+ (.jpg) -->
+          <div class="glass-card rounded-2xl p-4 text-center">
+            <h3 class="text-sm font-semibold text-gray-300 uppercase tracking-wider mb-3">Pacotes Diamante+</h3>
+            <img src="tabela-diamante.jpg" alt="Tabela Vodacom Diamante+" class="w-full h-auto rounded-xl shadow-2xl border border-gray-800 object-cover">
+          </div>
+
+        </div>
+
+        <!-- Formas de Pagamento & Contactos Integrados com Badges -->
+        <div class="glass-card rounded-2xl p-6 mb-8 border-red-600/20">
+          
+          <!-- Badges de Pagamento -->
+          <div class="flex flex-wrap items-center justify-between gap-4 border-b border-gray-800 pb-4 mb-6">
+            <h4 class="text-xs font-bold text-gray-400 uppercase tracking-widest">Formas de Pagamento Aceites</h4>
+            <div class="flex flex-wrap items-center gap-3">
+              <!-- Badge M-Pesa -->
+              <span class="inline-flex items-center gap-1.5 bg-red-600/20 border border-red-600/40 text-red-400 px-3 py-1 rounded-lg text-xs font-bold">
+                <span class="w-2 h-2 rounded-full bg-red-600"></span> M-Pesa
+              </span>
+              <!-- Badge e-Mola -->
+              <span class="inline-flex items-center gap-1.5 bg-amber-500/20 border border-amber-500/40 text-amber-400 px-3 py-1 rounded-lg text-xs font-bold">
+                <span class="w-2 h-2 rounded-full bg-amber-500"></span> e-Mola
+              </span>
+              <!-- Badge Millennium bim -->
+              <span class="inline-flex items-center gap-1.5 bg-sky-600/20 border border-sky-500/40 text-sky-400 px-3 py-1 rounded-lg text-xs font-bold">
+                <i data-lucide="building-2" class="w-3.5 h-3.5"></i> Millennium bim
+              </span>
+            </div>
+          </div>
+
+          <!-- Números de Pagamento -->
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm text-gray-200">
+            <div class="bg-gray-900/80 p-3.5 rounded-xl border border-gray-800 hover:border-red-600/40 transition">
+              <span class="text-xs text-red-500 font-bold block mb-1">HÉLIO</span>
+              <span class="font-mono font-bold text-base tracking-wide">85 769 5766</span>
+            </div>
+            <div class="bg-gray-900/80 p-3.5 rounded-xl border border-gray-800 hover:border-red-600/40 transition">
+              <span class="text-xs text-red-500 font-bold block mb-1">BENILDO</span>
+              <span class="font-mono font-bold text-base tracking-wide">87 909 3608</span>
+            </div>
+            <div class="bg-gray-900/80 p-3.5 rounded-xl border border-gray-800 hover:border-red-600/40 transition">
+              <span class="text-xs text-red-500 font-bold block mb-1">BENILDO</span>
+              <span class="font-mono font-bold text-base tracking-wide">12 339 16049</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Action Button Comercial -->
+        <div class="glass-card rounded-2xl p-6 text-center border-red-600/30">
+          <h3 class="text-xl font-bold text-white mb-2">Deseja Ativar os Seus Megas Agora?</h3>
+          <p class="text-gray-400 text-sm mb-6 max-w-md mx-auto">Escolha o seu pacote, efetue a transferência e clique abaixo para enviar o comprovativo e ativar instantaneamente.</p>
+          
+          <a href="https://chat.whatsapp.com/Gsx6KZksBYCBKQuLV7X2lq?s=cl&p=i&ilr=4" target="_blank" class="inline-flex items-center justify-center gap-3 bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 rounded-xl text-base transition shadow-lg shadow-red-600/30">
+            <i data-lucide="shopping-cart" class="w-5 h-5"></i> Comprar / Ativar Megas no WhatsApp
+          </a>
+        </div>
+
+      </div>
+    </main>
+
+    <!-- ==================== TELA BL4CK BOT ==================== -->
+    <main id="tab-content-bot" class="tab-page hidden flex-1 max-w-7xl mx-auto px-4 sm:px-6 py-8 w-full">
+      <div class="max-w-4xl mx-auto text-center">
+        <div class="glass-card rounded-2xl p-8 border-gray-800">
+          <i data-lucide="bot" class="w-12 h-12 text-red-500 mx-auto mb-4"></i>
+          <h2 class="text-2xl font-bold text-white mb-2">BL4CK BOT WhatsApp</h2>
+          <p class="text-gray-400 text-sm max-w-md mx-auto mb-6">Bot automatizado para vendas e gestão de serviços no WhatsApp.</p>
+          <span class="inline-flex items-center gap-2 bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-4 py-2 rounded-xl text-xs font-bold">
+            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> Sistema Online & Ativo
+          </span>
         </div>
       </div>
+    </main>
 
-      <!-- Card: Bot WhatsApp -->
-      <div class="card glass-card rounded-2xl p-6 glow-red transition duration-300" data-category="bots" data-name="bot whatsapp bl4ck bot automacao">
-        <div class="flex justify-between items-start mb-4">
-          <div class="bg-red-500/10 p-3 rounded-xl border border-red-500/20 text-red-500">
-            <i data-lucide="bot"></i>
-          </div>
-          <span class="text-xs font-semibold bg-gray-800 text-gray-300 px-2.5 py-1 rounded-md">Automação</span>
-        </div>
-        <h3 class="text-xl font-bold text-white mb-2">BL4CK BOT - WhatsApp</h3>
-        <p class="text-gray-400 text-sm mb-4">Bot completo para gestão de grupos, comandos interativos e detetor de comprovativos.</p>
-        <div class="flex justify-between items-center pt-4 border-t border-gray-800">
-          <div>
-            <span class="text-xs text-gray-500 block">Plano</span>
-            <span class="text-lg font-bold text-red-500">Sob Consulta</span>
-          </div>
-          <button onclick="abrirModal('BL4CK BOT WhatsApp', 'Solicite o seu bot personalizado para WhatsApp.')" class="bg-gray-800 hover:bg-red-600 text-white font-medium px-4 py-2 rounded-lg text-sm transition">
-            Ver Detalhes
-          </button>
+    <!-- ==================== TELA HISTÓRICO ==================== -->
+    <main id="tab-content-historico" class="tab-page hidden flex-1 max-w-7xl mx-auto px-4 sm:px-6 py-8 w-full">
+      <div class="max-w-4xl mx-auto">
+        <div class="glass-card rounded-2xl p-6 border-gray-800">
+          <h2 class="text-xl font-bold text-white mb-4 flex items-center gap-2">
+            <i data-lucide="history" class="w-5 h-5 text-red-500"></i> Histórico de Pedidos
+          </h2>
+          <p class="text-gray-400 text-sm">Seus últimos pedidos concluídos aparecerão aqui.</p>
         </div>
       </div>
+    </main>
 
-      <!-- Card: Netflix -->
-      <div class="card glass-card rounded-2xl p-6 glow-red transition duration-300" data-category="streaming" data-name="netflix perfis contas streaming 4k">
-        <div class="flex justify-between items-start mb-4">
-          <div class="bg-red-600/10 p-3 rounded-xl border border-red-600/20 text-red-500">
-            <i data-lucide="tv"></i>
-          </div>
-          <span class="text-xs font-semibold bg-gray-800 text-gray-300 px-2.5 py-1 rounded-md">Contas VIP</span>
-        </div>
-        <h3 class="text-xl font-bold text-white mb-2">Perfil Netflix 4K</h3>
-        <p class="text-gray-400 text-sm mb-4">Perfis individuais com PIN exclusivo, qualidade Ultra HD e garantia durante todo o mês.</p>
-        <div class="flex justify-between items-center pt-4 border-t border-gray-800">
-          <div>
-            <span class="text-xs text-gray-500 block">Mensalidade</span>
-            <span class="text-lg font-bold text-red-500">Preço VIP</span>
-          </div>
-          <button onclick="abrirModal('Perfil Netflix 4K', 'Perfil individual com PIN pessoal e suporte garantido.')" class="bg-gray-800 hover:bg-red-600 text-white font-medium px-4 py-2 rounded-lg text-sm transition">
-            Comprar Perfil
-          </button>
+    <!-- ==================== TELA PENDENTES ==================== -->
+    <main id="tab-content-pendentes" class="tab-page hidden flex-1 max-w-7xl mx-auto px-4 sm:px-6 py-8 w-full">
+      <div class="max-w-4xl mx-auto">
+        <div class="glass-card rounded-2xl p-6 border-gray-800">
+          <h2 class="text-xl font-bold text-white mb-4 flex items-center gap-2">
+            <i data-lucide="clock" class="w-5 h-5 text-amber-500"></i> Pedidos Pendentes
+          </h2>
+          <p class="text-gray-400 text-sm">Transferências em verificação e ativações pendentes.</p>
         </div>
       </div>
+    </main>
 
-    </div>
-  </main>
-
-  <!-- Modal Interativo de Compra -->
-  <div id="modalService" class="fixed inset-0 bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-4 z-50">
-    <div class="glass-card max-w-md w-full rounded-2xl p-6 border border-gray-700 relative">
-      <button onclick="fecharModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white">
-        <i data-lucide="x"></i>
-      </button>
-      <h3 id="modalTitle" class="text-2xl font-bold text-white mb-2"></h3>
-      <p id="modalDesc" class="text-gray-400 text-sm mb-6"></p>
-
-      <div class="bg-gray-900 p-4 rounded-xl border border-gray-800 mb-6">
-        <span class="text-xs text-gray-500 block mb-1">Atendimento bl4cksolutions</span>
-        <p class="text-xs text-gray-300">Você será direcionado para o atendimento direto no WhatsApp para concluir seu pedido.</p>
-      </div>
-
-      <a id="modalWhatsappLink" href="#" target="_blank" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-xl flex items-center justify-center gap-2 transition">
-        <i data-lucide="shopping-cart"></i> Solicitar no WhatsApp
-      </a>
-    </div>
   </div>
 
-  <!-- Footer -->
-  <footer class="glass-card border-t border-gray-800 mt-12 py-6 text-center text-xs text-gray-500">
-    <p>&copy; 2026 bl4cksolutions. Todos os direitos reservados.</p>
+  <!-- ==================== RODAPÉ ==================== -->
+  <footer class="border-t border-gray-800 py-6 text-center text-xs text-gray-500 mt-auto">
+    <p>© 2026 BL4CK SOLLUTIONS. Todos os direitos reservados.</p>
   </footer>
 
-  <!-- Scripts -->
+  <!-- ==================== SCRIPT DE TROCA DE ABAS ==================== -->
   <script>
+    // Inicializa os ícones do Lucide
     lucide.createIcons();
 
-    function filtrarServicos() {
-      const input = document.getElementById('searchInput').value.toLowerCase();
-      const cards = document.querySelectorAll('.card');
+    // Função para trocar de abas
+    function switchTab(tabName) {
+      // Esconde todas as abas
+      document.querySelectorAll('.tab-page').forEach(el => el.classList.add('hidden'));
 
-      cards.forEach(card => {
-        const name = card.getAttribute('data-name');
-        if (name.includes(input)) {
-          card.style.display = "block";
-        } else {
-          card.style.display = "none";
-        }
+      // Reseta o estilo de todos os botões
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.className = "tab-btn px-3 py-2 rounded-xl text-xs sm:text-sm font-semibold transition flex items-center gap-1.5 text-gray-400 hover:text-white hover:bg-gray-800";
       });
-    }
 
-    function filtrarCategoria(categoria) {
-      const cards = document.querySelectorAll('.card');
-      const buttons = document.querySelectorAll('.filter-btn');
+      // Exibe a aba selecionada
+      const activeContent = document.getElementById('tab-content-' + tabName);
+      if (activeContent) {
+        activeContent.classList.remove('hidden');
+      }
 
-      buttons.forEach(btn => btn.classList.remove('bg-red-600', 'text-white'));
-      event.target.classList.add('bg-red-600', 'text-white');
-
-      cards.forEach(card => {
-        if (categoria === 'todos' || card.getAttribute('data-category') === categoria) {
-          card.style.display = "block";
-        } else {
-          card.style.display = "none";
-        }
-      });
-    }
-
-    function abrirModal(titulo, descricao) {
-      document.getElementById('modalTitle').innerText = titulo;
-      document.getElementById('modalDesc').innerText = descricao;
-      const textWa = encodeURIComponent(`Olá, vim pelo site bl4cksolutions e quero comprar/saber mais sobre: ${titulo}`);
-      document.getElementById('modalWhatsappLink').href = `https://wa.me/258857695766?text=${textWa}`;
-      document.getElementById('modalService').classList.remove('hidden');
-    }
-
-    function fecharModal() {
-      document.getElementById('modalService').classList.add('hidden');
+      // Destaca o botão ativo
+      const activeBtn = document.getElementById('btn-' + tabName);
+      if (activeBtn) {
+        activeBtn.className = "tab-btn px-3 py-2 rounded-xl text-xs sm:text-sm font-semibold transition flex items-center gap-1.5 bg-red-600/20 text-red-400 border border-red-600/30";
+      }
     }
   </script>
 </body>
