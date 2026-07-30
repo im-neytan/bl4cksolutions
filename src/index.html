@@ -37,13 +37,19 @@
         .glow-red {
             box-shadow: 0 0 20px rgba(255, 30, 67, 0.25);
         }
-        /* Efeito de Scroll Suave para Banners */
-        .banner-scroll::-webkit-scrollbar {
-            height: 6px;
+        .carousel-container {
+            position: relative;
+            overflow: hidden;
+            width: 100%;
         }
-        .banner-scroll::-webkit-scrollbar-thumb {
-            background: rgba(236, 72, 153, 0.4);
-            border-radius: 10px;
+        .carousel-track {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            width: 100%;
+        }
+        .carousel-slide {
+            min-width: 100%;
+            box-sizing: border-box;
         }
     </style>
 </head>
@@ -53,7 +59,7 @@
     <header class="sticky top-0 z-50 bg-[#0b0c10]/95 backdrop-blur-md border-b border-pink-500/20 px-4 py-3">
         <div class="max-w-7xl mx-auto flex items-center justify-between">
             
-            <!-- LOGO OPÇÃO 1 (SPIDER / CYBER NET) -->
+            <!-- LOGO -->
             <a href="javascript:void(0)" onclick="switchTab('home')" class="flex items-center gap-3 group">
                 <div class="w-11 h-11 rounded-xl bg-pink-500/10 border border-pink-500/30 flex items-center justify-center group-hover:border-pink-500 transition-all glow-pink">
                     <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
@@ -72,7 +78,6 @@
             <nav class="hidden md:flex items-center gap-6 text-sm font-semibold">
                 <button onclick="switchTab('home')" class="hover:text-pink-500 transition text-pink-400 font-bold">Início</button>
                 <button onclick="switchTab('vodacom')" class="hover:text-pink-500 transition">Vodacom</button>
-                <button onclick="switchTab('movitel')" class="hover:text-pink-500 transition">Movitel</button>
                 <button onclick="switchTab('freefire')" class="hover:text-pink-500 transition">Free Fire</button>
                 <button onclick="switchTab('netflix')" class="hover:text-pink-500 transition">Netflix</button>
                 <button onclick="switchTab('bots')" class="hover:text-pink-500 transition">Serviços & Automações</button>
@@ -96,7 +101,6 @@
         <div id="mobileMenu" class="hidden md:hidden bg-[#12141c] border-b border-pink-500/20 px-4 py-4 mt-2 space-y-3">
             <button onclick="switchTab('home')" class="block w-full text-left py-2 px-3 rounded hover:bg-pink-500/10 text-pink-400 font-bold">Página Inicial</button>
             <button onclick="switchTab('vodacom')" class="block w-full text-left py-2 px-3 rounded hover:bg-pink-500/10 hover:text-pink-400">Vodacom Megabytes</button>
-            <button onclick="switchTab('movitel')" class="block w-full text-left py-2 px-3 rounded hover:bg-pink-500/10 hover:text-pink-400">Movitel Megabytes</button>
             <button onclick="switchTab('freefire')" class="block w-full text-left py-2 px-3 rounded hover:bg-pink-500/10 hover:text-pink-400">Free Fire Diamantes</button>
             <button onclick="switchTab('netflix')" class="block w-full text-left py-2 px-3 rounded hover:bg-pink-500/10 hover:text-pink-400">Contas Netflix</button>
             <button onclick="switchTab('bots')" class="block w-full text-left py-2 px-3 rounded hover:bg-pink-500/10 hover:text-pink-400">Serviços & Automações</button>
@@ -112,52 +116,41 @@
     <!-- CARROSSEL DE BANNERS -->
     <section class="bg-[#12141c]/80 py-6 border-b border-pink-500/10">
         <div class="max-w-7xl mx-auto px-4">
-            <div class="flex gap-4 overflow-x-auto pb-4 banner-scroll snap-x">
+            <div class="carousel-container border border-white/10 bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 shadow-2xl rounded-3xl" id="carousel">
+                <div class="carousel-track" id="carouselTrack">
+                    
+                    <!-- Banner 1: Serviços -->
+                    <div class="carousel-slide p-6 sm:p-10 flex flex-col justify-center min-h-[180px]">
+                        <span class="w-fit px-3 py-1 rounded-full bg-pink-500/20 text-pink-400 text-xs font-bold font-mono border border-pink-500/30 mb-2">ENTREGA INSTANTÂNEA</span>
+                        <h2 class="text-xl sm:text-3xl font-black text-white">Serviços Digitais Rápido e Seguro</h2>
+                        <p class="text-xs sm:text-sm text-gray-300 mt-2 max-w-xl">Megabytes e serviços enviados com total segurança e suporte direto.</p>
+                    </div>
+
+                    <!-- Banner 2: Netflix -->
+                    <div class="carousel-slide p-6 sm:p-10 flex flex-col justify-center min-h-[180px] bg-gradient-to-r from-red-950 via-black to-slate-900">
+                        <span class="w-fit px-3 py-1 rounded-full bg-red-600/30 text-red-400 text-xs font-bold font-mono border border-red-600/40 mb-2">STREAMING PREMIUM</span>
+                        <h2 class="text-xl sm:text-3xl font-black text-white">Perfis Netflix Ultra HD</h2>
+                        <p class="text-xs sm:text-sm text-gray-300 mt-2 max-w-xl">Assista aos seus filmes e séries favoritos com conta privada e qualidade máxima.</p>
+                    </div>
+
+                    <!-- Banner 3: Free Fire -->
+                    <div class="carousel-slide p-6 sm:p-10 flex flex-col justify-center min-h-[180px] bg-gradient-to-r from-amber-950 via-slate-900 to-amber-950">
+                        <span class="w-fit px-3 py-1 rounded-full bg-amber-500/20 text-amber-400 text-xs font-bold font-mono border border-amber-500/30 mb-2">GARENA TOPUP</span>
+                        <h2 class="text-xl sm:text-3xl font-black text-white">Recargas de Diamantes Free Fire</h2>
+                        <p class="text-xs sm:text-sm text-gray-300 mt-2 max-w-xl">Recarregue seus diamantes diretamente na sua ID com envio imediato.</p>
+                    </div>
+
+                    <!-- Banner 4: Automação -->
+                    <div class="carousel-slide p-6 sm:p-10 flex flex-col justify-center min-h-[180px] bg-gradient-to-r from-emerald-950 via-slate-900 to-emerald-950">
+                        <span class="w-fit px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-400 text-xs font-bold font-mono border border-emerald-500/30 mb-2">AUTOMAÇÃO VIP</span>
+                        <h2 class="text-xl sm:text-3xl font-black text-white">Sistemas BL4CK BOT & BL4CK X</h2>
+                        <p class="text-xs sm:text-sm text-gray-300 mt-2 max-w-xl">Atendimento automático e gerenciamento inteligente para soluções digitais.</p>
+                    </div>
+
+                </div>
                 
-                <!-- BANNER 1 -->
-                <div class="min-w-[290px] md:min-w-[340px] snap-start bg-gradient-to-r from-pink-900/40 to-purple-900/40 border border-pink-500/30 rounded-2xl p-5 flex items-center gap-4 glow-pink">
-                    <div class="w-12 h-12 rounded-xl bg-pink-500/20 flex items-center justify-center text-pink-400 text-2xl shrink-0">
-                        <i class="fa-solid fa-bolt"></i>
-                    </div>
-                    <div>
-                        <h4 class="font-bold text-white text-sm">ENTREGA INSTANTÂNEA</h4>
-                        <p class="text-xs text-gray-300 mt-1">Megabytes e serviços enviados na hora 24/7</p>
-                    </div>
-                </div>
-
-                <!-- BANNER 2 -->
-                <div class="min-w-[290px] md:min-w-[340px] snap-start bg-gradient-to-r from-green-900/40 to-emerald-900/40 border border-green-500/30 rounded-2xl p-5 flex items-center gap-4">
-                    <div class="w-12 h-12 rounded-xl bg-green-500/20 flex items-center justify-center text-green-400 text-2xl shrink-0">
-                        <i class="fa-brands fa-whatsapp"></i>
-                    </div>
-                    <div>
-                        <h4 class="font-bold text-white text-sm">ACOMPANHE AS REDES</h4>
-                        <p class="text-xs text-gray-300 mt-1">Entre no nosso Grupo VIP no WhatsApp</p>
-                    </div>
-                </div>
-
-                <!-- BANNER 3 -->
-                <div class="min-w-[290px] md:min-w-[340px] snap-start bg-gradient-to-r from-blue-900/40 to-indigo-900/40 border border-blue-500/30 rounded-2xl p-5 flex items-center gap-4">
-                    <div class="w-12 h-12 rounded-xl bg-blue-500/20 flex items-center justify-center text-blue-400 text-2xl shrink-0">
-                        <i class="fa-solid fa-shield-halved"></i>
-                    </div>
-                    <div>
-                        <h4 class="font-bold text-white text-sm">100% CONFIÁVEL</h4>
-                        <p class="text-xs text-gray-300 mt-1">Compra garantida e sem intermediários</p>
-                    </div>
-                </div>
-
-                <!-- BANNER 4 -->
-                <div class="min-w-[290px] md:min-w-[340px] snap-start bg-gradient-to-r from-orange-900/40 to-red-900/40 border border-orange-500/30 rounded-2xl p-5 flex items-center gap-4">
-                    <div class="w-12 h-12 rounded-xl bg-orange-500/20 flex items-center justify-center text-orange-400 text-2xl shrink-0">
-                        <i class="fa-solid fa-gamepad"></i>
-                    </div>
-                    <div>
-                        <h4 class="font-bold text-white text-sm">RECARGAS FREE FIRE</h4>
-                        <p class="text-xs text-gray-300 mt-1">Diamantes direto via ID de jogador</p>
-                    </div>
-                </div>
-
+                <!-- Indicadores (Pontos) -->
+                <div class="absolute bottom-3 left-0 right-0 flex justify-center gap-1.5" id="carouselDots"></div>
             </div>
         </div>
     </section>
@@ -172,12 +165,9 @@
             <div class="bg-gradient-to-r from-pink-900/30 via-[#12141c] to-purple-900/30 border border-pink-500/20 rounded-3xl p-6 md:p-8 mb-10 glow-pink">
                 <span class="text-xs font-mono bg-pink-500/20 text-pink-400 px-3 py-1 rounded-full font-bold uppercase tracking-wider">Bem-vindo à BL4CK_SOLUTIONS</span>
                 <h1 class="text-3xl md:text-5xl font-black text-white mt-4">Sua plataforma oficial de <span class="text-pink-500">Megabytes & Serviços</span></h1>
-                <p class="text-gray-300 text-sm md:text-base mt-2 max-w-2xl">Oferecemos os melhores preços em pacotes de internet Vodacom, Movitel, recargas Free Fire e contas Netflix com atendimento rápido em Moçambique.</p>
+                <p class="text-gray-300 text-sm md:text-base mt-2 max-w-2xl">Oferecemos os melhores preços em pacotes de internet Vodacom, recargas Free Fire e contas Netflix com atendimento rápido.</p>
                 <div class="flex flex-wrap gap-4 mt-6">
                     <button onclick="switchTab('vodacom')" class="px-6 py-3 rounded-xl bg-pink-500 hover:bg-pink-600 text-white font-bold text-sm transition">Ver Pacotes Vodacom</button>
-                    <a href="https://chat.whatsapp.com/Gsx6KZksBYCBKQuLV7X2lq?s=sh&p=i&ilr=4" target="_blank" class="px-6 py-3 rounded-xl bg-green-600/20 border border-green-500 text-green-400 font-bold text-sm hover:bg-green-600 hover:text-white transition flex items-center gap-2">
-                        <i class="fa-brands fa-whatsapp"></i> Grupo VIP
-                    </a>
                 </div>
             </div>
 
@@ -192,25 +182,25 @@
                         <span class="text-[10px] font-bold text-pink-400 bg-pink-500/10 px-2 py-0.5 rounded">Diário</span>
                         <h4 class="text-lg font-black text-white mt-2">1024 MB (1GB)</h4>
                         <p class="text-xl font-black text-pink-500 my-1">24 MT</p>
-                        <a href="https://wa.me/258857695766?text=Ol%C3%A1%2C%20quero%20comprar%201024MB%20Vodacom%20(24MT)" target="_blank" class="block w-full py-2 rounded-xl bg-pink-500 hover:bg-pink-600 text-white font-bold text-center text-xs transition mt-2">Comprar</a>
+                        <a href="https://chat.whatsapp.com/Gsx6KZksBYCBKQuLV7X2lq?s=cl&p=i&ilr=4" target="_blank" class="block w-full py-2 rounded-xl bg-pink-500 hover:bg-pink-600 text-white font-bold text-center text-xs transition mt-2">Comprar no Grupo</a>
                     </div>
                     <div class="bg-[#12141c] border border-gray-800 rounded-2xl p-4">
                         <span class="text-[10px] font-bold text-pink-400 bg-pink-500/10 px-2 py-0.5 rounded">Diário</span>
                         <h4 class="text-lg font-black text-white mt-2">5120 MB (5GB)</h4>
                         <p class="text-xl font-black text-pink-500 my-1">120 MT</p>
-                        <a href="https://wa.me/258857695766?text=Ol%C3%A1%2C%20quero%20comprar%205120MB%20Vodacom%20(120MT)" target="_blank" class="block w-full py-2 rounded-xl bg-pink-500 hover:bg-pink-600 text-white font-bold text-center text-xs transition mt-2">Comprar</a>
+                        <a href="https://chat.whatsapp.com/Gsx6KZksBYCBKQuLV7X2lq?s=cl&p=i&ilr=4" target="_blank" class="block w-full py-2 rounded-xl bg-pink-500 hover:bg-pink-600 text-white font-bold text-center text-xs transition mt-2">Comprar no Grupo</a>
                     </div>
                     <div class="bg-[#12141c] border border-gray-800 rounded-2xl p-4">
                         <span class="text-[10px] font-bold text-purple-400 bg-purple-500/10 px-2 py-0.5 rounded">Mensal</span>
                         <h4 class="text-lg font-black text-white mt-2">10.000 MB (10GB)</h4>
                         <p class="text-xl font-black text-pink-500 my-1">285 MT</p>
-                        <a href="https://wa.me/258857695766?text=Ol%C3%A1%2C%20quero%20comprar%2010000MB%20Vodacom%20(285MT)" target="_blank" class="block w-full py-2 rounded-xl bg-pink-500 hover:bg-pink-600 text-white font-bold text-center text-xs transition mt-2">Comprar</a>
+                        <a href="https://chat.whatsapp.com/Gsx6KZksBYCBKQuLV7X2lq?s=cl&p=i&ilr=4" target="_blank" class="block w-full py-2 rounded-xl bg-pink-500 hover:bg-pink-600 text-white font-bold text-center text-xs transition mt-2">Comprar no Grupo</a>
                     </div>
                     <div class="bg-[#12141c] border border-gray-800 rounded-2xl p-4">
                         <span class="text-[10px] font-bold text-purple-400 bg-purple-500/10 px-2 py-0.5 rounded">Mensal</span>
                         <h4 class="text-lg font-black text-white mt-2">20.000 MB (20GB)</h4>
                         <p class="text-xl font-black text-pink-500 my-1">560 MT</p>
-                        <a href="https://wa.me/258857695766?text=Ol%C3%A1%2C%20quero%20comprar%2020000MB%20Vodacom%20(560MT)" target="_blank" class="block w-full py-2 rounded-xl bg-pink-500 hover:bg-pink-600 text-white font-bold text-center text-xs transition mt-2">Comprar</a>
+                        <a href="https://chat.whatsapp.com/Gsx6KZksBYCBKQuLV7X2lq?s=cl&p=i&ilr=4" target="_blank" class="block w-full py-2 rounded-xl bg-pink-500 hover:bg-pink-600 text-white font-bold text-center text-xs transition mt-2">Comprar no Grupo</a>
                     </div>
                 </div>
             </div>
@@ -258,42 +248,42 @@
                 <div class="bg-[#12141c] border border-gray-800 rounded-xl p-4 text-center">
                     <h4 class="font-bold text-white text-base">410 MB</h4>
                     <p class="text-lg font-black text-pink-500 my-1">10 MT</p>
-                    <a href="https://wa.me/258857695766?text=Ol%C3%A1%2C%20quero%20comprar%20410MB%20(10MT)" target="_blank" class="block w-full py-1.5 rounded-lg bg-pink-500 hover:bg-pink-600 text-white font-bold text-xs">Comprar</a>
+                    <a href="https://chat.whatsapp.com/Gsx6KZksBYCBKQuLV7X2lq?s=cl&p=i&ilr=4" target="_blank" class="block w-full py-1.5 rounded-lg bg-pink-500 hover:bg-pink-600 text-white font-bold text-xs">Comprar no Grupo</a>
                 </div>
                 <div class="bg-[#12141c] border border-gray-800 rounded-xl p-4 text-center">
                     <h4 class="font-bold text-white text-base">512 MB</h4>
                     <p class="text-lg font-black text-pink-500 my-1">12 MT</p>
-                    <a href="https://wa.me/258857695766?text=Ol%C3%A1%2C%20quero%20comprar%20512MB%20(12MT)" target="_blank" class="block w-full py-1.5 rounded-lg bg-pink-500 hover:bg-pink-600 text-white font-bold text-xs">Comprar</a>
+                    <a href="https://chat.whatsapp.com/Gsx6KZksBYCBKQuLV7X2lq?s=cl&p=i&ilr=4" target="_blank" class="block w-full py-1.5 rounded-lg bg-pink-500 hover:bg-pink-600 text-white font-bold text-xs">Comprar no Grupo</a>
                 </div>
                 <div class="bg-[#12141c] border border-gray-800 rounded-xl p-4 text-center">
                     <h4 class="font-bold text-white text-base">1024 MB</h4>
                     <p class="text-lg font-black text-pink-500 my-1">24 MT</p>
-                    <a href="https://wa.me/258857695766?text=Ol%C3%A1%2C%20quero%20comprar%201024MB%20(24MT)" target="_blank" class="block w-full py-1.5 rounded-lg bg-pink-500 hover:bg-pink-600 text-white font-bold text-xs">Comprar</a>
+                    <a href="https://chat.whatsapp.com/Gsx6KZksBYCBKQuLV7X2lq?s=cl&p=i&ilr=4" target="_blank" class="block w-full py-1.5 rounded-lg bg-pink-500 hover:bg-pink-600 text-white font-bold text-xs">Comprar no Grupo</a>
                 </div>
                 <div class="bg-[#12141c] border border-gray-800 rounded-xl p-4 text-center">
                     <h4 class="font-bold text-white text-base">2048 MB</h4>
                     <p class="text-lg font-black text-pink-500 my-1">48 MT</p>
-                    <a href="https://wa.me/258857695766?text=Ol%C3%A1%2C%20quero%20comprar%202048MB%20(48MT)" target="_blank" class="block w-full py-1.5 rounded-lg bg-pink-500 hover:bg-pink-600 text-white font-bold text-xs">Comprar</a>
+                    <a href="https://chat.whatsapp.com/Gsx6KZksBYCBKQuLV7X2lq?s=cl&p=i&ilr=4" target="_blank" class="block w-full py-1.5 rounded-lg bg-pink-500 hover:bg-pink-600 text-white font-bold text-xs">Comprar no Grupo</a>
                 </div>
                 <div class="bg-[#12141c] border border-gray-800 rounded-xl p-4 text-center">
                     <h4 class="font-bold text-white text-base">3072 MB</h4>
                     <p class="text-lg font-black text-pink-500 my-1">72 MT</p>
-                    <a href="https://wa.me/258857695766?text=Ol%C3%A1%2C%20quero%20comprar%203072MB%20(72MT)" target="_blank" class="block w-full py-1.5 rounded-lg bg-pink-500 hover:bg-pink-600 text-white font-bold text-xs">Comprar</a>
+                    <a href="https://chat.whatsapp.com/Gsx6KZksBYCBKQuLV7X2lq?s=cl&p=i&ilr=4" target="_blank" class="block w-full py-1.5 rounded-lg bg-pink-500 hover:bg-pink-600 text-white font-bold text-xs">Comprar no Grupo</a>
                 </div>
                 <div class="bg-[#12141c] border border-gray-800 rounded-xl p-4 text-center">
                     <h4 class="font-bold text-white text-base">4096 MB</h4>
                     <p class="text-lg font-black text-pink-500 my-1">96 MT</p>
-                    <a href="https://wa.me/258857695766?text=Ol%C3%A1%2C%20quero%20comprar%204096MB%20(96MT)" target="_blank" class="block w-full py-1.5 rounded-lg bg-pink-500 hover:bg-pink-600 text-white font-bold text-xs">Comprar</a>
+                    <a href="https://chat.whatsapp.com/Gsx6KZksBYCBKQuLV7X2lq?s=cl&p=i&ilr=4" target="_blank" class="block w-full py-1.5 rounded-lg bg-pink-500 hover:bg-pink-600 text-white font-bold text-xs">Comprar no Grupo</a>
                 </div>
                 <div class="bg-[#12141c] border border-gray-800 rounded-xl p-4 text-center">
                     <h4 class="font-bold text-white text-base">5120 MB</h4>
                     <p class="text-lg font-black text-pink-500 my-1">120 MT</p>
-                    <a href="https://wa.me/258857695766?text=Ol%C3%A1%2C%20quero%20comprar%205120MB%20(120MT)" target="_blank" class="block w-full py-1.5 rounded-lg bg-pink-500 hover:bg-pink-600 text-white font-bold text-xs">Comprar</a>
+                    <a href="https://chat.whatsapp.com/Gsx6KZksBYCBKQuLV7X2lq?s=cl&p=i&ilr=4" target="_blank" class="block w-full py-1.5 rounded-lg bg-pink-500 hover:bg-pink-600 text-white font-bold text-xs">Comprar no Grupo</a>
                 </div>
                 <div class="bg-[#12141c] border border-gray-800 rounded-xl p-4 text-center">
                     <h4 class="font-bold text-white text-base">10240 MB</h4>
                     <p class="text-lg font-black text-pink-500 my-1">250 MT</p>
-                    <a href="https://wa.me/258857695766?text=Ol%C3%A1%2C%20quero%20comprar%2010240MB%20(250MT)" target="_blank" class="block w-full py-1.5 rounded-lg bg-pink-500 hover:bg-pink-600 text-white font-bold text-xs">Comprar</a>
+                    <a href="https://chat.whatsapp.com/Gsx6KZksBYCBKQuLV7X2lq?s=cl&p=i&ilr=4" target="_blank" class="block w-full py-1.5 rounded-lg bg-pink-500 hover:bg-pink-600 text-white font-bold text-xs">Comprar no Grupo</a>
                 </div>
             </div>
 
@@ -307,7 +297,7 @@
                     </div>
                     <div class="text-right">
                         <p class="text-xl font-black text-pink-500">95 MT</p>
-                        <a href="https://wa.me/258857695766?text=Ol%C3%A1%2C%20quero%20comprar%203480MB%20Semanal%20(95MT)" target="_blank" class="inline-block px-4 py-1.5 rounded-lg bg-pink-500 text-white font-bold text-xs mt-1">Comprar</a>
+                        <a href="https://chat.whatsapp.com/Gsx6KZksBYCBKQuLV7X2lq?s=cl&p=i&ilr=4" target="_blank" class="inline-block px-4 py-1.5 rounded-lg bg-pink-500 text-white font-bold text-xs mt-1">Comprar no Grupo</a>
                     </div>
                 </div>
                 <div class="bg-[#12141c] border border-gray-800 rounded-xl p-4 flex items-center justify-between">
@@ -317,7 +307,7 @@
                     </div>
                     <div class="text-right">
                         <p class="text-xl font-black text-pink-500">140 MT</p>
-                        <a href="https://wa.me/258857695766?text=Ol%C3%A1%2C%20quero%20comprar%205300MB%20Semanal%20(140MT)" target="_blank" class="inline-block px-4 py-1.5 rounded-lg bg-pink-500 text-white font-bold text-xs mt-1">Comprar</a>
+                        <a href="https://chat.whatsapp.com/Gsx6KZksBYCBKQuLV7X2lq?s=cl&p=i&ilr=4" target="_blank" class="inline-block px-4 py-1.5 rounded-lg bg-pink-500 text-white font-bold text-xs mt-1">Comprar no Grupo</a>
                     </div>
                 </div>
             </div>
@@ -328,46 +318,46 @@
                 <div class="bg-[#12141c] border border-gray-800 rounded-xl p-3 text-center">
                     <h4 class="font-bold text-white text-sm">2.857 MB</h4>
                     <p class="text-base font-black text-pink-500 my-1">90 MT</p>
-                    <a href="https://wa.me/258857695766?text=Ol%C3%A1%2C%20quero%20comprar%202857MB%20Mensal%20(90MT)" target="_blank" class="block w-full py-1 rounded bg-pink-500 text-white font-bold text-[11px]">Comprar</a>
+                    <a href="https://chat.whatsapp.com/Gsx6KZksBYCBKQuLV7X2lq?s=cl&p=i&ilr=4" target="_blank" class="block w-full py-1 rounded bg-pink-500 text-white font-bold text-[11px]">Comprar no Grupo</a>
                 </div>
                 <div class="bg-[#12141c] border border-gray-800 rounded-xl p-3 text-center">
                     <h4 class="font-bold text-white text-sm">5.000 MB</h4>
                     <p class="text-base font-black text-pink-500 my-1">160 MT</p>
-                    <a href="https://wa.me/258857695766?text=Ol%C3%A1%2C%20quero%20comprar%205000MB%20Mensal%20(160MT)" target="_blank" class="block w-full py-1 rounded bg-pink-500 text-white font-bold text-[11px]">Comprar</a>
+                    <a href="https://chat.whatsapp.com/Gsx6KZksBYCBKQuLV7X2lq?s=cl&p=i&ilr=4" target="_blank" class="block w-full py-1 rounded bg-pink-500 text-white font-bold text-[11px]">Comprar no Grupo</a>
                 </div>
                 <div class="bg-[#12141c] border border-gray-800 rounded-xl p-3 text-center">
                     <h4 class="font-bold text-white text-sm">7.000 MB</h4>
                     <p class="text-base font-black text-pink-500 my-1">195 MT</p>
-                    <a href="https://wa.me/258857695766?text=Ol%C3%A1%2C%20quero%20comprar%207000MB%20Mensal%20(195MT)" target="_blank" class="block w-full py-1 rounded bg-pink-500 text-white font-bold text-[11px]">Comprar</a>
+                    <a href="https://chat.whatsapp.com/Gsx6KZksBYCBKQuLV7X2lq?s=cl&p=i&ilr=4" target="_blank" class="block w-full py-1 rounded bg-pink-500 text-white font-bold text-[11px]">Comprar no Grupo</a>
                 </div>
                 <div class="bg-[#12141c] border border-gray-800 rounded-xl p-3 text-center">
                     <h4 class="font-bold text-white text-sm">8.000 MB</h4>
                     <p class="text-base font-black text-pink-500 my-1">225 MT</p>
-                    <a href="https://wa.me/258857695766?text=Ol%C3%A1%2C%20quero%20comprar%208000MB%20Mensal%20(225MT)" target="_blank" class="block w-full py-1 rounded bg-pink-500 text-white font-bold text-[11px]">Comprar</a>
+                    <a href="https://chat.whatsapp.com/Gsx6KZksBYCBKQuLV7X2lq?s=cl&p=i&ilr=4" target="_blank" class="block w-full py-1 rounded bg-pink-500 text-white font-bold text-[11px]">Comprar no Grupo</a>
                 </div>
                 <div class="bg-[#12141c] border border-gray-800 rounded-xl p-3 text-center">
                     <h4 class="font-bold text-white text-sm">10.000 MB</h4>
                     <p class="text-base font-black text-pink-500 my-1">285 MT</p>
-                    <a href="https://wa.me/258857695766?text=Ol%C3%A1%2C%20quero%20comprar%2010000MB%20Mensal%20(285MT)" target="_blank" class="block w-full py-1 rounded bg-pink-500 text-white font-bold text-[11px]">Comprar</a>
+                    <a href="https://chat.whatsapp.com/Gsx6KZksBYCBKQuLV7X2lq?s=cl&p=i&ilr=4" target="_blank" class="block w-full py-1 rounded bg-pink-500 text-white font-bold text-[11px]">Comprar no Grupo</a>
                 </div>
                 <div class="bg-[#12141c] border border-gray-800 rounded-xl p-3 text-center">
                     <h4 class="font-bold text-white text-sm">13.000 MB</h4>
                     <p class="text-base font-black text-pink-500 my-1">375 MT</p>
-                    <a href="https://wa.me/258857695766?text=Ol%C3%A1%2C%20quero%20comprar%2013000MB%20Mensal%20(375MT)" target="_blank" class="block w-full py-1 rounded bg-pink-500 text-white font-bold text-[11px]">Comprar</a>
+                    <a href="https://chat.whatsapp.com/Gsx6KZksBYCBKQuLV7X2lq?s=cl&p=i&ilr=4" target="_blank" class="block w-full py-1 rounded bg-pink-500 text-white font-bold text-[11px]">Comprar no Grupo</a>
                 </div>
                 <div class="bg-[#12141c] border border-gray-800 rounded-xl p-3 text-center">
                     <h4 class="font-bold text-white text-sm">17.000 MB</h4>
                     <p class="text-base font-black text-pink-500 my-1">485 MT</p>
-                    <a href="https://wa.me/258857695766?text=Ol%C3%A1%2C%20quero%20comprar%2017000MB%20Mensal%20(485MT)" target="_blank" class="block w-full py-1 rounded bg-pink-500 text-white font-bold text-[11px]">Comprar</a>
+                    <a href="https://chat.whatsapp.com/Gsx6KZksBYCBKQuLV7X2lq?s=cl&p=i&ilr=4" target="_blank" class="block w-full py-1 rounded bg-pink-500 text-white font-bold text-[11px]">Comprar no Grupo</a>
                 </div>
                 <div class="bg-[#12141c] border border-gray-800 rounded-xl p-3 text-center">
                     <h4 class="font-bold text-white text-sm">20.000 MB</h4>
                     <p class="text-base font-black text-pink-500 my-1">560 MT</p>
-                    <a href="https://wa.me/258857695766?text=Ol%C3%A1%2C%20quero%20comprar%2020000MB%20Mensal%20(560MT)" target="_blank" class="block w-full py-1 rounded bg-pink-500 text-white font-bold text-[11px]">Comprar</a>
+                    <a href="https://chat.whatsapp.com/Gsx6KZksBYCBKQuLV7X2lq?s=cl&p=i&ilr=4" target="_blank" class="block w-full py-1 rounded bg-pink-500 text-white font-bold text-[11px]">Comprar no Grupo</a>
                 </div>
             </div>
 
-            <!-- PACOTES VODACOM COMBO (CHAMADAS + SMS + GB) -->
+            <!-- PACOTES VODACOM COMBO -->
             <h3 class="text-sm font-bold text-red-500 uppercase tracking-wider mb-3 flex items-center gap-2"><i class="fa-solid fa-phone"></i> Vodacom Combo (Chamadas + SMS Ilimitadas + GB) - 30 Dias</h3>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div class="bg-[#12141c] border border-red-500/30 rounded-2xl p-4 flex items-center justify-between">
@@ -377,7 +367,7 @@
                     </div>
                     <div class="text-right">
                         <p class="text-xl font-black text-red-500">450 MT</p>
-                        <a href="https://wa.me/258857695766?text=Ol%C3%A1%2C%20quero%20comprar%20Combo%20Vodacom%2011GB%20(450MT)" target="_blank" class="inline-block px-4 py-1.5 rounded-lg bg-red-600 text-white font-bold text-xs mt-1">Comprar</a>
+                        <a href="https://chat.whatsapp.com/Gsx6KZksBYCBKQuLV7X2lq?s=cl&p=i&ilr=4" target="_blank" class="inline-block px-4 py-1.5 rounded-lg bg-red-600 text-white font-bold text-xs mt-1">Comprar no Grupo</a>
                     </div>
                 </div>
                 <div class="bg-[#12141c] border border-red-500/30 rounded-2xl p-4 flex items-center justify-between">
@@ -387,7 +377,7 @@
                     </div>
                     <div class="text-right">
                         <p class="text-xl font-black text-red-500">580 MT</p>
-                        <a href="https://wa.me/258857695766?text=Ol%C3%A1%2C%20quero%20comprar%20Combo%20Vodacom%2015GB%20(580MT)" target="_blank" class="inline-block px-4 py-1.5 rounded-lg bg-red-600 text-white font-bold text-xs mt-1">Comprar</a>
+                        <a href="https://chat.whatsapp.com/Gsx6KZksBYCBKQuLV7X2lq?s=cl&p=i&ilr=4" target="_blank" class="inline-block px-4 py-1.5 rounded-lg bg-red-600 text-white font-bold text-xs mt-1">Comprar no Grupo</a>
                     </div>
                 </div>
                 <div class="bg-[#12141c] border border-red-500/30 rounded-2xl p-4 flex items-center justify-between">
@@ -397,7 +387,7 @@
                     </div>
                     <div class="text-right">
                         <p class="text-xl font-black text-red-500">720 MT</p>
-                        <a href="https://wa.me/258857695766?text=Ol%C3%A1%2C%20quero%20comprar%20Combo%20Vodacom%2021GB%20(720MT)" target="_blank" class="inline-block px-4 py-1.5 rounded-lg bg-red-600 text-white font-bold text-xs mt-1">Comprar</a>
+                        <a href="https://chat.whatsapp.com/Gsx6KZksBYCBKQuLV7X2lq?s=cl&p=i&ilr=4" target="_blank" class="inline-block px-4 py-1.5 rounded-lg bg-red-600 text-white font-bold text-xs mt-1">Comprar no Grupo</a>
                     </div>
                 </div>
                 <div class="bg-[#12141c] border border-red-500/30 rounded-2xl p-4 flex items-center justify-between">
@@ -407,7 +397,7 @@
                     </div>
                     <div class="text-right">
                         <p class="text-xl font-black text-red-500">970 MT</p>
-                        <a href="https://wa.me/258857695766?text=Ol%C3%A1%2C%20quero%20comprar%20Combo%20Vodacom%2030GB%20(970MT)" target="_blank" class="inline-block px-4 py-1.5 rounded-lg bg-red-600 text-white font-bold text-xs mt-1">Comprar</a>
+                        <a href="https://chat.whatsapp.com/Gsx6KZksBYCBKQuLV7X2lq?s=cl&p=i&ilr=4" target="_blank" class="inline-block px-4 py-1.5 rounded-lg bg-red-600 text-white font-bold text-xs mt-1">Comprar no Grupo</a>
                     </div>
                 </div>
             </div>
@@ -418,39 +408,7 @@
             </div>
         </section>
 
-        <!-- ================= ABA 3: MOVITEL ================= -->
-        <section id="tab-movitel" class="tab-content hidden">
-            <div class="flex items-center gap-3 mb-6">
-                <div class="w-10 h-10 rounded-lg bg-yellow-500/20 border border-yellow-500 flex items-center justify-center text-yellow-400 font-bold text-xl">M</div>
-                <div>
-                    <h2 class="text-2xl font-black text-white">Pacotes Movitel Megabytes</h2>
-                    <p class="text-xs text-gray-400">Pacotes rápidos para a rede Movitel</p>
-                </div>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div class="bg-[#12141c] border border-gray-800 rounded-2xl p-5">
-                    <span class="text-xs font-mono bg-yellow-500/20 text-yellow-400 px-2.5 py-1 rounded-full font-bold">Diário</span>
-                    <h4 class="text-xl font-black text-white mt-3">1.5 GB Movitel</h4>
-                    <p class="text-2xl font-black text-yellow-400 my-2">50 MT</p>
-                    <a href="https://wa.me/258857695766?text=Ol%C3%A1%2C%20quero%20comprar%201.5GB%20Movitel" target="_blank" class="block w-full py-2.5 rounded-xl bg-yellow-500 text-black font-bold text-center text-sm">Comprar Movitel</a>
-                </div>
-                <div class="bg-[#12141c] border border-gray-800 rounded-2xl p-5">
-                    <span class="text-xs font-mono bg-yellow-500/20 text-yellow-400 px-2.5 py-1 rounded-full font-bold">Semanal</span>
-                    <h4 class="text-xl font-black text-white mt-3">4.0 GB Movitel</h4>
-                    <p class="text-2xl font-black text-yellow-400 my-2">200 MT</p>
-                    <a href="https://wa.me/258857695766?text=Ol%C3%A1%2C%20quero%20comprar%204GB%20Movitel" target="_blank" class="block w-full py-2.5 rounded-xl bg-yellow-500 text-black font-bold text-center text-sm">Comprar Movitel</a>
-                </div>
-                <div class="bg-[#12141c] border border-gray-800 rounded-2xl p-5">
-                    <span class="text-xs font-mono bg-yellow-500/20 text-yellow-400 px-2.5 py-1 rounded-full font-bold">Mensal</span>
-                    <h4 class="text-xl font-black text-white mt-3">15.0 GB Movitel</h4>
-                    <p class="text-2xl font-black text-yellow-400 my-2">950 MT</p>
-                    <a href="https://wa.me/258857695766?text=Ol%C3%A1%2C%20quero%20comprar%2015GB%20Movitel" target="_blank" class="block w-full py-2.5 rounded-xl bg-yellow-500 text-black font-bold text-center text-sm">Comprar Movitel</a>
-                </div>
-            </div>
-        </section>
-
-        <!-- ================= ABA 4: FREE FIRE ================= -->
+        <!-- ================= ABA 3: FREE FIRE ================= -->
         <section id="tab-freefire" class="tab-content hidden">
             <div class="flex items-center gap-3 mb-6">
                 <div class="w-10 h-10 rounded-lg bg-orange-500/20 border border-orange-500 flex items-center justify-center text-orange-400 font-bold text-xl"><i class="fa-solid fa-fire"></i></div>
@@ -482,7 +440,7 @@
             </div>
         </section>
 
-        <!-- ================= ABA 5: NETFLIX ================= -->
+        <!-- ================= ABA 4: NETFLIX ================= -->
         <section id="tab-netflix" class="tab-content hidden">
             <div class="flex items-center gap-3 mb-6">
                 <div class="w-10 h-10 rounded-lg bg-red-600/20 border border-red-600 flex items-center justify-center text-red-500 font-bold text-xl"><i class="fa-solid fa-tv"></i></div>
@@ -508,7 +466,7 @@
             </div>
         </section>
 
-        <!-- ================= ABA 6: SERVIÇOS & AUTOMAÇÕES ================= -->
+        <!-- ================= ABA 5: SERVIÇOS & AUTOMAÇÕES ================= -->
         <section id="tab-bots" class="tab-content hidden">
             <div class="flex items-center gap-3 mb-6">
                 <div class="w-10 h-10 rounded-lg bg-emerald-500/20 border border-emerald-500 flex items-center justify-center text-emerald-400 font-bold text-xl"><i class="fa-solid fa-robot"></i></div>
@@ -543,7 +501,7 @@
                     </div>
                     <h3 class="text-xl font-black text-white">BL4CK X</h3>
                     <p class="text-xs text-gray-300 mt-2 leading-relaxed">
-                        Versão avançada para automação de vendas diretas, alta performance de resposta e integração com comandos rápidos para grupos e chats privados.
+                        Versão avançada para automação de vendas diretas, alta performance de resposta e integração com comandos rápidos.
                     </p>
                     <div class="mt-4 pt-4 border-t border-gray-800 flex items-center justify-between">
                         <span class="text-sm font-bold text-purple-400">Disponível Sob Consulta</span>
@@ -557,7 +515,7 @@
         <section class="mt-16 pt-10 border-t border-gray-800">
             <div class="text-center max-w-2xl mx-auto mb-10">
                 <h2 class="text-2xl md:text-3xl font-black text-white">Por que comprar com a <span class="text-pink-500">BL4CK_SOLUTIONS</span>?</h2>
-                <p class="text-xs md:text-sm text-gray-400 mt-2">Garantimos rapidez, segurança total e atendimento VIP para todos os nossos clientes em Moçambique.</p>
+                <p class="text-xs md:text-sm text-gray-400 mt-2">Garantimos rapidez, segurança total e atendimento VIP para todos os nossos clientes.</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
@@ -590,7 +548,7 @@
                         <i class="fa-solid fa-star"></i>
                     </div>
                     <h3 class="font-bold text-white mb-2">Melhores Preços</h3>
-                    <p class="text-xs text-gray-400">Tabelas promocionais e vantagens exclusivas para membros do nosso grupo.</p>
+                    <p class="text-xs text-gray-400">Tabelas promocionais e vantagens exclusivas.</p>
                 </div>
             </div>
         </section>
@@ -599,7 +557,7 @@
 
     <!-- FOOTER / FALE CONOSCO -->
     <footer class="bg-[#12141c] border-t border-pink-500/20 py-10 px-4 mt-12">
-        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6 mb-8">
             
             <!-- MARCA -->
             <div>
@@ -616,38 +574,18 @@
                 <p class="text-xs text-gray-400">Soluções digitais em revenda de megabytes, sistemas e recargas de jogos online.</p>
             </div>
 
-            <!-- GRUPO WHATSAPP -->
+            <!-- BOTÃO ATENDIMENTO DIRETO -->
             <div>
-                <h4 class="font-bold text-white text-sm mb-3">Grupo VIP Oficial</h4>
-                <a href="https://chat.whatsapp.com/Gsx6KZksBYCBKQuLV7X2lq?s=sh&p=i&ilr=4" target="_blank" class="inline-flex items-center gap-2 bg-green-600/20 border border-green-500/40 text-green-400 px-4 py-2 rounded-xl text-xs font-bold hover:bg-green-600 hover:text-white transition">
-                    <i class="fa-brands fa-whatsapp text-lg"></i> Entrar no Grupo VIP WhatsApp
+                <a href="https://wa.me/258857695766?text=Ol%C3%A1%2C%20preciso%20de%20atendimento" target="_blank" class="inline-flex items-center gap-2 bg-green-600/20 border border-green-500/40 text-green-400 px-5 py-2.5 rounded-xl text-xs font-bold hover:bg-green-600 hover:text-white transition">
+                    <i class="fa-brands fa-whatsapp text-lg"></i> Falar com Atendimento
                 </a>
-            </div>
-
-            <!-- REDES SOCIAIS / FALE CONOSCO -->
-            <div>
-                <h4 class="font-bold text-white text-sm mb-3">Acompanhe Nossas Redes</h4>
-                <div class="flex items-center gap-3">
-                    <a href="https://wa.me/258857695766" target="_blank" class="w-10 h-10 rounded-full bg-green-600/20 border border-green-500 text-green-400 flex items-center justify-center hover:bg-green-600 hover:text-white transition" title="WhatsApp Direto">
-                        <i class="fa-brands fa-whatsapp text-lg"></i>
-                    </a>
-                    <a href="https://facebook.com" target="_blank" class="w-10 h-10 rounded-full bg-blue-600/20 border border-blue-500 text-blue-400 flex items-center justify-center hover:bg-blue-600 hover:text-white transition" title="Facebook">
-                        <i class="fa-brands fa-facebook-f text-lg"></i>
-                    </a>
-                    <a href="https://instagram.com" target="_blank" class="w-10 h-10 rounded-full bg-pink-600/20 border border-pink-500 text-pink-400 flex items-center justify-center hover:bg-pink-600 hover:text-white transition" title="Instagram">
-                        <i class="fa-brands fa-instagram text-lg"></i>
-                    </a>
-                    <a href="https://youtube.com" target="_blank" class="w-10 h-10 rounded-full bg-red-600/20 border border-red-500 text-red-500 flex items-center justify-center hover:bg-red-600 hover:text-white transition" title="YouTube">
-                        <i class="fa-brands fa-youtube text-lg"></i>
-                    </a>
-                </div>
             </div>
 
         </div>
 
         <!-- COPYRIGHT -->
         <div class="max-w-7xl mx-auto pt-6 border-t border-gray-800 flex flex-col md:flex-row items-center justify-between text-[11px] text-gray-500">
-            <p>&copy; 2026 bl4ck_solutions. Todos os direitos reservados. Suporte: +258 857 695 766</p>
+            <p>&copy; 2026 bl4ck_solutions. Todos os direitos reservados.</p>
             <button onclick="scrollToTop()" class="mt-2 md:mt-0 text-pink-400 hover:underline flex items-center gap-1">
                 <i class="fa-solid fa-arrow-up"></i> Voltar ao Topo
             </button>
@@ -656,24 +594,70 @@
 
     <!-- JAVASCRIPT LOGIC -->
     <script>
+        // LÓGICA DO CARROSSEL
+        const track = document.getElementById('carouselTrack');
+        const slides = document.querySelectorAll('.carousel-slide');
+        const dotsContainer = document.getElementById('carouselDots');
+        let currentIndex = 0;
+        let startX = 0;
+        let isDragging = false;
+
+        slides.forEach((_, i) => {
+            const dot = document.createElement('button');
+            dot.className = `w-2 h-2 rounded-full transition-all ${i === 0 ? 'bg-pink-500 w-5' : 'bg-white/30'}`;
+            dot.onclick = () => goToSlide(i);
+            dotsContainer.appendChild(dot);
+        });
+
+        function updateDots() {
+            const dots = dotsContainer.querySelectorAll('button');
+            dots.forEach((dot, i) => {
+                dot.className = `w-2 h-2 rounded-full transition-all ${i === currentIndex ? 'bg-pink-500 w-5' : 'bg-white/30'}`;
+            });
+        }
+
+        function goToSlide(index) {
+            currentIndex = index;
+            track.style.transform = `translateX(-${currentIndex * 100}%)`;
+            updateDots();
+        }
+
+        const carousel = document.getElementById('carousel');
+        carousel.addEventListener('touchstart', e => { 
+            startX = e.touches[0].clientX; 
+            isDragging = true; 
+        });
+        
+        carousel.addEventListener('touchend', e => {
+            if (!isDragging) return;
+            isDragging = false;
+            const endX = e.changedTouches[0].clientX;
+            const diffX = startX - endX;
+            if (diffX > 50 && currentIndex < slides.length - 1) currentIndex++;
+            else if (diffX < -50 && currentIndex > 0) currentIndex--;
+            goToSlide(currentIndex);
+        });
+
+        setInterval(() => {
+            currentIndex = (currentIndex + 1) % slides.length;
+            goToSlide(currentIndex);
+        }, 4500);
+
+        // NAVEGAÇÃO ENTRE ABAS
         function switchTab(tabId, addHistory = true) {
-            // Esconde todas as abas
             const tabs = document.querySelectorAll('.tab-content');
             tabs.forEach(tab => tab.classList.add('hidden'));
 
-            // Mostra a aba selecionada
             const targetTab = document.getElementById('tab-' + tabId);
             if (targetTab) {
                 targetTab.classList.remove('hidden');
             }
 
-            // Fecha o menu mobile se estiver aberto
             const mobileMenu = document.getElementById('mobileMenu');
             if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
                 mobileMenu.classList.add('hidden');
             }
 
-            // Registra a mudança no histórico para suporte ao botão voltar
             if (addHistory) {
                 history.pushState({ tab: tabId }, '', '#' + tabId);
             }
@@ -681,7 +665,6 @@
             scrollToTop();
         }
 
-        // Detecta quando o usuário clica no botão voltar (Android) ou desliza a tela (iPhone)
         window.addEventListener('popstate', function(event) {
             if (event.state && event.state.tab) {
                 switchTab(event.state.tab, false);
@@ -690,7 +673,6 @@
             }
         });
 
-        // Define o estado inicial da página no histórico
         window.addEventListener('DOMContentLoaded', function() {
             const initialTab = window.location.hash ? window.location.hash.replace('#', '') : 'home';
             switchTab(initialTab, false);
