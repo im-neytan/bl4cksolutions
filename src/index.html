@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BL4CK_SOLUTIONS | Elite Digital TopUp & Services</title>
+    <title>BL4CK_SOLUTIONS | Elite Digital TopUp</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -16,8 +16,7 @@
                             pink: '#ec4899',
                             red: '#ff1e43',
                             dark: '#0b0c10',
-                            card: '#12141c',
-                            cardLight: '#ffffff'
+                            card: '#12141c'
                         }
                     }
                 }
@@ -33,34 +32,29 @@
             font-family: 'Montserrat', sans-serif;
         }
         .glow-pink {
-            box-shadow: 0 0 20px rgba(236, 72, 153, 0.35);
+            box-shadow: 0 0 20px rgba(236, 72, 153, 0.25);
         }
         .glow-red {
-            box-shadow: 0 0 20px rgba(255, 30, 67, 0.35);
+            box-shadow: 0 0 20px rgba(255, 30, 67, 0.25);
         }
-        /* Estilização do Carrossel Infinito Continuo */
-        .carousel-track {
-            display: flex;
-            width: calc(280px * 16);
-            animation: scrollContinuo 35s linear infinite;
+        /* Efeito de Scroll Suave para Banners */
+        .banner-scroll::-webkit-scrollbar {
+            height: 6px;
         }
-        .carousel-track:hover {
-            animation-play-state: paused;
-        }
-        @keyframes scrollContinuo {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(calc(-280px * 8)); }
+        .banner-scroll::-webkit-scrollbar-thumb {
+            background: rgba(236, 72, 153, 0.4);
+            border-radius: 10px;
         }
     </style>
 </head>
 <body class="bg-[#0b0c10] text-gray-100 dark:bg-[#0b0c10] dark:text-gray-100 transition-colors duration-300 min-h-screen flex flex-col justify-between" id="top">
 
-    <!-- NAV / HEADER -->
-    <header class="sticky top-0 z-50 bg-[#0b0c10]/90 backdrop-blur-md border-b border-pink-500/20 px-4 py-3">
+    <!-- HEADER / NAV -->
+    <header class="sticky top-0 z-50 bg-[#0b0c10]/95 backdrop-blur-md border-b border-pink-500/20 px-4 py-3">
         <div class="max-w-7xl mx-auto flex items-center justify-between">
             
-            <!-- LOGO OPÇÃO 1: SPIDER / CYBER NET -->
-            <a href="#top" onclick="scrollToTop()" class="flex items-center gap-3 group">
+            <!-- LOGO OPÇÃO 1 (SPIDER / CYBER NET) -->
+            <a href="javascript:void(0)" onclick="switchTab('home')" class="flex items-center gap-3 group">
                 <div class="w-11 h-11 rounded-xl bg-pink-500/10 border border-pink-500/30 flex items-center justify-center group-hover:border-pink-500 transition-all glow-pink">
                     <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
                         <path d="M12 2L15 6H9L12 2Z" fill="#ec4899" />
@@ -76,21 +70,22 @@
 
             <!-- NAV DESKTOP -->
             <nav class="hidden md:flex items-center gap-6 text-sm font-semibold">
+                <button onclick="switchTab('home')" class="hover:text-pink-500 transition text-pink-400 font-bold">Início</button>
                 <button onclick="switchTab('vodacom')" class="hover:text-pink-500 transition">Vodacom</button>
                 <button onclick="switchTab('movitel')" class="hover:text-pink-500 transition">Movitel</button>
                 <button onclick="switchTab('freefire')" class="hover:text-pink-500 transition">Free Fire</button>
                 <button onclick="switchTab('netflix')" class="hover:text-pink-500 transition">Netflix</button>
-                <button onclick="switchTab('bots')" class="hover:text-pink-500 transition">Bots WhatsApp</button>
+                <button onclick="switchTab('bots')" class="hover:text-pink-500 transition">Serviços & Automações</button>
             </nav>
 
-            <!-- DARK / LIGHT TOGGLE DESKTOP & MENU MOBILE -->
+            <!-- DARK / LIGHT TOGGLE DESKTOP & MOBILE MENU -->
             <div class="flex items-center gap-3">
                 <button onclick="toggleTheme()" class="p-2 rounded-lg border border-gray-700 bg-gray-800/50 text-yellow-400 hover:border-pink-500 transition" title="Alternar Tema">
                     <i class="fa-solid fa-sun dark:block hidden"></i>
                     <i class="fa-solid fa-moon dark:hidden block text-pink-400"></i>
                 </button>
 
-                <!-- BOTÃO MENU HAMBÚRGUER (MOBILE) -->
+                <!-- BOTÃO MENU HAMBÚRGUER -->
                 <button onclick="toggleMobileMenu()" class="md:hidden p-2 text-gray-300 hover:text-white">
                     <i class="fa-solid fa-bars text-xl"></i>
                 </button>
@@ -99,203 +94,331 @@
 
         <!-- MENU MOBILE DROPDOWN -->
         <div id="mobileMenu" class="hidden md:hidden bg-[#12141c] border-b border-pink-500/20 px-4 py-4 mt-2 space-y-3">
+            <button onclick="switchTab('home')" class="block w-full text-left py-2 px-3 rounded hover:bg-pink-500/10 text-pink-400 font-bold">Página Inicial</button>
             <button onclick="switchTab('vodacom')" class="block w-full text-left py-2 px-3 rounded hover:bg-pink-500/10 hover:text-pink-400">Vodacom Megabytes</button>
             <button onclick="switchTab('movitel')" class="block w-full text-left py-2 px-3 rounded hover:bg-pink-500/10 hover:text-pink-400">Movitel Megabytes</button>
             <button onclick="switchTab('freefire')" class="block w-full text-left py-2 px-3 rounded hover:bg-pink-500/10 hover:text-pink-400">Free Fire Diamantes</button>
             <button onclick="switchTab('netflix')" class="block w-full text-left py-2 px-3 rounded hover:bg-pink-500/10 hover:text-pink-400">Contas Netflix</button>
-            <button onclick="switchTab('bots')" class="block w-full text-left py-2 px-3 rounded hover:bg-pink-500/10 hover:text-pink-400">Bots WhatsApp (BL4CK BOT)</button>
+            <button onclick="switchTab('bots')" class="block w-full text-left py-2 px-3 rounded hover:bg-pink-500/10 hover:text-pink-400">Serviços & Automações</button>
             <div class="pt-2 border-t border-gray-800 flex items-center justify-between">
                 <span class="text-xs text-gray-400">Modo de Exibição</span>
                 <button onclick="toggleTheme()" class="px-3 py-1 rounded-lg border border-pink-500/30 bg-pink-500/10 text-xs text-pink-400 font-semibold flex items-center gap-2">
-                    <i class="fa-solid fa-circle-half-stroke"></i> Alternar Tema
+                    <i class="fa-solid fa-circle-half-stroke"></i> Modo Claro/Escuro
                 </button>
             </div>
         </div>
     </header>
 
-    <!-- CARROSSEL INFINITO DE BANNERS -->
-    <section class="overflow-hidden bg-[#12141c]/60 py-4 border-b border-pink-500/10 relative">
-        <div class="carousel-track gap-4 px-4">
-            <!-- 8 Banners (Duplicados para efeito Infinito Real de Scroll Continuo) -->
-            <!-- CARD 1 -->
-            <div class="w-[270px] shrink-0 bg-gradient-to-r from-pink-900/40 to-purple-900/40 border border-pink-500/30 rounded-xl p-4 flex items-center gap-3">
-                <i class="fa-solid fa-bolt text-2xl text-pink-400"></i>
-                <div>
-                    <h4 class="text-xs font-bold text-white">ENTREGA INSTANTÂNEA</h4>
-                    <p class="text-[10px] text-gray-300">Transferências Automáticas 24/7</p>
+    <!-- CARROSSEL DE BANNERS -->
+    <section class="bg-[#12141c]/80 py-6 border-b border-pink-500/10">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex gap-4 overflow-x-auto pb-4 banner-scroll snap-x">
+                
+                <!-- BANNER 1 -->
+                <div class="min-w-[290px] md:min-w-[340px] snap-start bg-gradient-to-r from-pink-900/40 to-purple-900/40 border border-pink-500/30 rounded-2xl p-5 flex items-center gap-4 glow-pink">
+                    <div class="w-12 h-12 rounded-xl bg-pink-500/20 flex items-center justify-center text-pink-400 text-2xl shrink-0">
+                        <i class="fa-solid fa-bolt"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-white text-sm">ENTREGA INSTANTÂNEA</h4>
+                        <p class="text-xs text-gray-300 mt-1">Megabytes e serviços enviados na hora 24/7</p>
+                    </div>
                 </div>
-            </div>
-            <!-- CARD 2 -->
-            <div class="w-[270px] shrink-0 bg-gradient-to-r from-red-900/40 to-pink-900/40 border border-red-500/30 rounded-xl p-4 flex items-center gap-3">
-                <i class="fa-brands fa-whatsapp text-2xl text-green-400"></i>
-                <div>
-                    <h4 class="text-xs font-bold text-white">ACOMPANHE AS REDES</h4>
-                    <p class="text-[10px] text-gray-300">Grupo VIP no WhatsApp Ativo</p>
-                </div>
-            </div>
-            <!-- CARD 3 -->
-            <div class="w-[270px] shrink-0 bg-gradient-to-r from-blue-900/40 to-indigo-900/40 border border-blue-500/30 rounded-xl p-4 flex items-center gap-3">
-                <i class="fa-solid fa-shield-halved text-2xl text-blue-400"></i>
-                <div>
-                    <h4 class="text-xs font-bold text-white">PORQUE COMPRAR CONOSCO?</h4>
-                    <p class="text-[10px] text-gray-300">100% Seguro & Burlador Zero</p>
-                </div>
-            </div>
-            <!-- CARD 4 -->
-            <div class="w-[270px] shrink-0 bg-gradient-to-r from-yellow-900/40 to-red-900/40 border border-yellow-500/30 rounded-xl p-4 flex items-center gap-3">
-                <i class="fa-solid fa-gamepad text-2xl text-yellow-400"></i>
-                <div>
-                    <h4 class="text-xs font-bold text-white">FREE FIRE ELITE TOPUP</h4>
-                    <p class="text-[10px] text-gray-300">Recargas de Diamantes via ID</p>
-                </div>
-            </div>
-            <!-- CARD 5 -->
-            <div class="w-[270px] shrink-0 bg-gradient-to-r from-red-950/60 to-black border border-red-600/30 rounded-xl p-4 flex items-center gap-3">
-                <i class="fa-solid fa-tv text-2xl text-red-500"></i>
-                <div>
-                    <h4 class="text-xs font-bold text-white">NETFLIX PREMIUM 4K</h4>
-                    <p class="text-[10px] text-gray-300">Telas Privadas e Sem Quedas</p>
-                </div>
-            </div>
-            <!-- CARD 6 -->
-            <div class="w-[270px] shrink-0 bg-gradient-to-r from-emerald-900/40 to-teal-900/40 border border-emerald-500/30 rounded-xl p-4 flex items-center gap-3">
-                <i class="fa-solid fa-robot text-2xl text-emerald-400"></i>
-                <div>
-                    <h4 class="text-xs font-bold text-white">BL4CK BOT BOT-MODS</h4>
-                    <p class="text-[10px] text-gray-300">Sistemas de Automação Node.js</p>
-                </div>
-            </div>
-            <!-- CARD 7 -->
-            <div class="w-[270px] shrink-0 bg-gradient-to-r from-pink-900/40 to-red-900/40 border border-pink-500/30 rounded-xl p-4 flex items-center gap-3">
-                <i class="fa-solid fa-[#ec4899] fa-wallet text-2xl text-pink-400"></i>
-                <div>
-                    <h4 class="text-xs font-bold text-white">PAGUE VIA M-PESA & E-MOLA</h4>
-                    <p class="text-[10px] text-gray-300">Pagamentos Nacionais Rápidos</p>
-                </div>
-            </div>
-            <!-- CARD 8 -->
-            <div class="w-[270px] shrink-0 bg-gradient-to-r from-purple-900/40 to-pink-900/40 border border-purple-500/30 rounded-xl p-4 flex items-center gap-3">
-                <i class="fa-solid fa-headset text-2xl text-purple-400"></i>
-                <div>
-                    <h4 class="text-xs font-bold text-white">SUPORTE DEDICADO</h4>
-                    <p class="text-[10px] text-gray-300">Atendimento 24 Horas por Dia</p>
-                </div>
-            </div>
 
-            <!-- CÓPIA EXATA PARA O LOOP INFINITO RECOMEÇAR SEM VOLTAR -->
-            <div class="w-[270px] shrink-0 bg-gradient-to-r from-pink-900/40 to-purple-900/40 border border-pink-500/30 rounded-xl p-4 flex items-center gap-3">
-                <i class="fa-solid fa-bolt text-2xl text-pink-400"></i>
-                <div><h4 class="text-xs font-bold text-white">ENTREGA INSTANTÂNEA</h4><p class="text-[10px] text-gray-300">Transferências Automáticas 24/7</p></div>
-            </div>
-            <div class="w-[270px] shrink-0 bg-gradient-to-r from-red-900/40 to-pink-900/40 border border-red-500/30 rounded-xl p-4 flex items-center gap-3">
-                <i class="fa-brands fa-whatsapp text-2xl text-green-400"></i>
-                <div><h4 class="text-xs font-bold text-white">ACOMPANHE AS REDES</h4><p class="text-[10px] text-gray-300">Grupo VIP no WhatsApp Ativo</p></div>
-            </div>
-            <div class="w-[270px] shrink-0 bg-gradient-to-r from-blue-900/40 to-indigo-900/40 border border-blue-500/30 rounded-xl p-4 flex items-center gap-3">
-                <i class="fa-solid fa-shield-halved text-2xl text-blue-400"></i>
-                <div><h4 class="text-xs font-bold text-white">PORQUE COMPRAR CONOSCO?</h4><p class="text-[10px] text-gray-300">100% Seguro & Burlador Zero</p></div>
-            </div>
-            <div class="w-[270px] shrink-0 bg-gradient-to-r from-yellow-900/40 to-red-900/40 border border-yellow-500/30 rounded-xl p-4 flex items-center gap-3">
-                <i class="fa-solid fa-gamepad text-2xl text-yellow-400"></i>
-                <div><h4 class="text-xs font-bold text-white">FREE FIRE ELITE TOPUP</h4><p class="text-[10px] text-gray-300">Recargas de Diamantes via ID</p></div>
-            </div>
-            <div class="w-[270px] shrink-0 bg-gradient-to-r from-red-950/60 to-black border border-red-600/30 rounded-xl p-4 flex items-center gap-3">
-                <i class="fa-solid fa-tv text-2xl text-red-500"></i>
-                <div><h4 class="text-xs font-bold text-white">NETFLIX PREMIUM 4K</h4><p class="text-[10px] text-gray-300">Telas Privadas e Sem Quedas</p></div>
-            </div>
-            <div class="w-[270px] shrink-0 bg-gradient-to-r from-emerald-900/40 to-teal-900/40 border border-emerald-500/30 rounded-xl p-4 flex items-center gap-3">
-                <i class="fa-solid fa-robot text-2xl text-emerald-400"></i>
-                <div><h4 class="text-xs font-bold text-white">BL4CK BOT BOT-MODS</h4><p class="text-[10px] text-gray-300">Sistemas de Automação Node.js</p></div>
-            </div>
-            <div class="w-[270px] shrink-0 bg-gradient-to-r from-pink-900/40 to-red-900/40 border border-pink-500/30 rounded-xl p-4 flex items-center gap-3">
-                <i class="fa-solid fa-wallet text-2xl text-pink-400"></i>
-                <div><h4 class="text-xs font-bold text-white">PAGUE VIA M-PESA & E-MOLA</h4><p class="text-[10px] text-gray-300">Pagamentos Nacionais Rápidos</p></div>
-            </div>
-            <div class="w-[270px] shrink-0 bg-gradient-to-r from-purple-900/40 to-pink-900/40 border border-purple-500/30 rounded-xl p-4 flex items-center gap-3">
-                <i class="fa-solid fa-headset text-2xl text-purple-400"></i>
-                <div><h4 class="text-xs font-bold text-white">SUPORTE DEDICADO</h4><p class="text-[10px] text-gray-300">Atendimento 24 Horas por Dia</p></div>
+                <!-- BANNER 2 -->
+                <div class="min-w-[290px] md:min-w-[340px] snap-start bg-gradient-to-r from-green-900/40 to-emerald-900/40 border border-green-500/30 rounded-2xl p-5 flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-xl bg-green-500/20 flex items-center justify-center text-green-400 text-2xl shrink-0">
+                        <i class="fa-brands fa-whatsapp"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-white text-sm">ACOMPANHE AS REDES</h4>
+                        <p class="text-xs text-gray-300 mt-1">Entre no nosso Grupo VIP no WhatsApp</p>
+                    </div>
+                </div>
+
+                <!-- BANNER 3 -->
+                <div class="min-w-[290px] md:min-w-[340px] snap-start bg-gradient-to-r from-blue-900/40 to-indigo-900/40 border border-blue-500/30 rounded-2xl p-5 flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-xl bg-blue-500/20 flex items-center justify-center text-blue-400 text-2xl shrink-0">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-white text-sm">100% CONFIÁVEL</h4>
+                        <p class="text-xs text-gray-300 mt-1">Compra garantida e sem intermediários</p>
+                    </div>
+                </div>
+
+                <!-- BANNER 4 -->
+                <div class="min-w-[290px] md:min-w-[340px] snap-start bg-gradient-to-r from-orange-900/40 to-red-900/40 border border-orange-500/30 rounded-2xl p-5 flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-xl bg-orange-500/20 flex items-center justify-center text-orange-400 text-2xl shrink-0">
+                        <i class="fa-solid fa-gamepad"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-white text-sm">RECARGAS FREE FIRE</h4>
+                        <p class="text-xs text-gray-300 mt-1">Diamantes direto via ID de jogador</p>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
 
-    <!-- ÁREA PRINCIPAL DE ABAS DOS SERVIÇOS -->
+    <!-- ÁREA PRINCIPAL DOS SERVIÇOS -->
     <main class="max-w-7xl mx-auto px-4 py-8 flex-grow w-full">
 
-        <!-- ABA VODACOM (AGORA COMPLETA: DIÁRIOS, SEMANAIS, MENSAIS, DIAMANTE+) -->
-        <section id="tab-vodacom" class="tab-content">
+        <!-- ================= ABA 1: HOME / PÁGINA INICIAL ================= -->
+        <section id="tab-home" class="tab-content">
+            
+            <!-- HERO WELCOME -->
+            <div class="bg-gradient-to-r from-pink-900/30 via-[#12141c] to-purple-900/30 border border-pink-500/20 rounded-3xl p-6 md:p-8 mb-10 glow-pink">
+                <span class="text-xs font-mono bg-pink-500/20 text-pink-400 px-3 py-1 rounded-full font-bold uppercase tracking-wider">Bem-vindo à BL4CK_SOLUTIONS</span>
+                <h1 class="text-3xl md:text-5xl font-black text-white mt-4">Sua plataforma oficial de <span class="text-pink-500">Megabytes & Serviços</span></h1>
+                <p class="text-gray-300 text-sm md:text-base mt-2 max-w-2xl">Oferecemos os melhores preços em pacotes de internet Vodacom, Movitel, recargas Free Fire e contas Netflix com atendimento rápido em Moçambique.</p>
+                <div class="flex flex-wrap gap-4 mt-6">
+                    <button onclick="switchTab('vodacom')" class="px-6 py-3 rounded-xl bg-pink-500 hover:bg-pink-600 text-white font-bold text-sm transition">Ver Pacotes Vodacom</button>
+                    <a href="https://chat.whatsapp.com/Gsx6KZksBYCBKQuLV7X2lq?s=sh&p=i&ilr=4" target="_blank" class="px-6 py-3 rounded-xl bg-green-600/20 border border-green-500 text-green-400 font-bold text-sm hover:bg-green-600 hover:text-white transition flex items-center gap-2">
+                        <i class="fa-brands fa-whatsapp"></i> Grupo VIP
+                    </a>
+                </div>
+            </div>
+
+            <!-- DESTAQUES VODACOM DIÁRIOS E MENSAIS -->
+            <div class="mb-10">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-black text-white flex items-center gap-2"><i class="fa-solid fa-wifi text-pink-500"></i> Destaques Vodacom Megabytes</h3>
+                    <button onclick="switchTab('vodacom')" class="text-xs text-pink-400 hover:underline font-bold">Ver Tabela Completa →</button>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                    <div class="bg-[#12141c] border border-gray-800 rounded-2xl p-4">
+                        <span class="text-[10px] font-bold text-pink-400 bg-pink-500/10 px-2 py-0.5 rounded">Diário</span>
+                        <h4 class="text-lg font-black text-white mt-2">1024 MB (1GB)</h4>
+                        <p class="text-xl font-black text-pink-500 my-1">24 MT</p>
+                        <a href="https://wa.me/258857695766?text=Ol%C3%A1%2C%20quero%20comprar%201024MB%20Vodacom%20(24MT)" target="_blank" class="block w-full py-2 rounded-xl bg-pink-500 hover:bg-pink-600 text-white font-bold text-center text-xs transition mt-2">Comprar</a>
+                    </div>
+                    <div class="bg-[#12141c] border border-gray-800 rounded-2xl p-4">
+                        <span class="text-[10px] font-bold text-pink-400 bg-pink-500/10 px-2 py-0.5 rounded">Diário</span>
+                        <h4 class="text-lg font-black text-white mt-2">5120 MB (5GB)</h4>
+                        <p class="text-xl font-black text-pink-500 my-1">120 MT</p>
+                        <a href="https://wa.me/258857695766?text=Ol%C3%A1%2C%20quero%20comprar%205120MB%20Vodacom%20(120MT)" target="_blank" class="block w-full py-2 rounded-xl bg-pink-500 hover:bg-pink-600 text-white font-bold text-center text-xs transition mt-2">Comprar</a>
+                    </div>
+                    <div class="bg-[#12141c] border border-gray-800 rounded-2xl p-4">
+                        <span class="text-[10px] font-bold text-purple-400 bg-purple-500/10 px-2 py-0.5 rounded">Mensal</span>
+                        <h4 class="text-lg font-black text-white mt-2">10.000 MB (10GB)</h4>
+                        <p class="text-xl font-black text-pink-500 my-1">285 MT</p>
+                        <a href="https://wa.me/258857695766?text=Ol%C3%A1%2C%20quero%20comprar%2010000MB%20Vodacom%20(285MT)" target="_blank" class="block w-full py-2 rounded-xl bg-pink-500 hover:bg-pink-600 text-white font-bold text-center text-xs transition mt-2">Comprar</a>
+                    </div>
+                    <div class="bg-[#12141c] border border-gray-800 rounded-2xl p-4">
+                        <span class="text-[10px] font-bold text-purple-400 bg-purple-500/10 px-2 py-0.5 rounded">Mensal</span>
+                        <h4 class="text-lg font-black text-white mt-2">20.000 MB (20GB)</h4>
+                        <p class="text-xl font-black text-pink-500 my-1">560 MT</p>
+                        <a href="https://wa.me/258857695766?text=Ol%C3%A1%2C%20quero%20comprar%2020000MB%20Vodacom%20(560MT)" target="_blank" class="block w-full py-2 rounded-xl bg-pink-500 hover:bg-pink-600 text-white font-bold text-center text-xs transition mt-2">Comprar</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RESUMO OUTROS SERVIÇOS -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- FREE FIRE -->
+                <div class="bg-[#12141c] border border-gray-800 rounded-2xl p-5 hover:border-orange-500/40 transition">
+                    <div class="w-10 h-10 rounded-lg bg-orange-500/20 text-orange-400 flex items-center justify-center text-xl mb-3"><i class="fa-solid fa-fire"></i></div>
+                    <h4 class="font-bold text-white text-base">Free Fire Diamantes</h4>
+                    <p class="text-xs text-gray-400 mt-1">Recargas diretas por ID a partir de 75 MT.</p>
+                    <button onclick="switchTab('freefire')" class="mt-4 text-xs text-orange-400 font-bold hover:underline">Conferir Tabela →</button>
+                </div>
+                <!-- NETFLIX -->
+                <div class="bg-[#12141c] border border-gray-800 rounded-2xl p-5 hover:border-red-600/40 transition">
+                    <div class="w-10 h-10 rounded-lg bg-red-600/20 text-red-500 flex items-center justify-center text-xl mb-3"><i class="fa-solid fa-tv"></i></div>
+                    <h4 class="font-bold text-white text-base">Contas Netflix Premium</h4>
+                    <p class="text-xs text-gray-400 mt-1">Telas privadas 4K por 30 dias a partir de 250 MT.</p>
+                    <button onclick="switchTab('netflix')" class="mt-4 text-xs text-red-400 font-bold hover:underline">Ver Telas Disponíveis →</button>
+                </div>
+                <!-- SERVIÇOS DIGITAIS -->
+                <div class="bg-[#12141c] border border-gray-800 rounded-2xl p-5 hover:border-emerald-500/40 transition">
+                    <div class="w-10 h-10 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-xl mb-3"><i class="fa-solid fa-robot"></i></div>
+                    <h4 class="font-bold text-white text-base">Sistemas & Automação</h4>
+                    <p class="text-xs text-gray-400 mt-1">Automação inteligente BL4CK BOT e BL4CK X.</p>
+                    <button onclick="switchTab('bots')" class="mt-4 text-xs text-emerald-400 font-bold hover:underline">Saiba Mais →</button>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- ================= ABA 2: VODACOM ================= -->
+        <section id="tab-vodacom" class="tab-content hidden">
             <div class="flex items-center gap-3 mb-6">
                 <div class="w-10 h-10 rounded-lg bg-red-600/20 border border-red-500 flex items-center justify-center text-red-500 font-bold text-xl">V</div>
                 <div>
-                    <h2 class="text-2xl font-black text-white">Pacotes Vodacom Megabytes</h2>
-                    <p class="text-xs text-gray-400">Selecione o seu plano ideal da Vodacom Moçambique</p>
+                    <h2 class="text-2xl font-black text-white">BL4CK MEGABYTES (Vodacom)</h2>
+                    <p class="text-xs text-gray-400">Tabela de pacotes de internet robótica atualizada</p>
                 </div>
             </div>
 
             <!-- PACOTES DIÁRIOS -->
-            <h3 class="text-sm font-bold text-pink-400 uppercase tracking-wider mb-4 flex items-center gap-2"><i class="fa-solid fa-sun"></i> Pacotes Diários</h3>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-                <div class="bg-[#12141c] border border-gray-800 rounded-2xl p-5 hover:border-pink-500/50 transition glow-pink">
-                    <span class="text-xs font-mono bg-pink-500/20 text-pink-400 px-2.5 py-1 rounded-full font-bold">Válido 24h</span>
-                    <h4 class="text-xl font-black text-white mt-3">1.2 GB (1200MB)</h4>
-                    <p class="text-2xl font-black text-pink-500 my-2">50 MT</p>
-                    <a href="https://wa.me/258857695766?text=Ol%C3%A1%2C%20quero%20comprar%201.2GB%20Vodacom%20(Di%C3%A1rio)" target="_blank" class="block w-full py-2.5 rounded-xl bg-pink-500 hover:bg-pink-600 text-white font-bold text-center text-sm transition">Comprar Agora</a>
+            <h3 class="text-sm font-bold text-pink-400 uppercase tracking-wider mb-3 flex items-center gap-2"><i class="fa-solid fa-sun"></i> Pacotes Diários</h3>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-8">
+                <div class="bg-[#12141c] border border-gray-800 rounded-xl p-4 text-center">
+                    <h4 class="font-bold text-white text-base">410 MB</h4>
+                    <p class="text-lg font-black text-pink-500 my-1">10 MT</p>
+                    <a href="https://wa.me/258857695766?text=Ol%C3%A1%2C%20quero%20comprar%20410MB%20(10MT)" target="_blank" class="block w-full py-1.5 rounded-lg bg-pink-500 hover:bg-pink-600 text-white font-bold text-xs">Comprar</a>
                 </div>
-                <div class="bg-[#12141c] border border-gray-800 rounded-2xl p-5 hover:border-pink-500/50 transition glow-pink">
-                    <span class="text-xs font-mono bg-pink-500/20 text-pink-400 px-2.5 py-1 rounded-full font-bold">Válido 24h</span>
-                    <h4 class="text-xl font-black text-white mt-3">2.5 GB (2500MB)</h4>
-                    <p class="text-2xl font-black text-pink-500 my-2">100 MT</p>
-                    <a href="https://wa.me/258857695766?text=Ol%C3%A1%2C%20quero%20comprar%202.5GB%20Vodacom%20(Di%C3%A1rio)" target="_blank" class="block w-full py-2.5 rounded-xl bg-pink-500 hover:bg-pink-600 text-white font-bold text-center text-sm transition">Comprar Agora</a>
+                <div class="bg-[#12141c] border border-gray-800 rounded-xl p-4 text-center">
+                    <h4 class="font-bold text-white text-base">512 MB</h4>
+                    <p class="text-lg font-black text-pink-500 my-1">12 MT</p>
+                    <a href="https://wa.me/258857695766?text=Ol%C3%A1%2C%20quero%20comprar%20512MB%20(12MT)" target="_blank" class="block w-full py-1.5 rounded-lg bg-pink-500 hover:bg-pink-600 text-white font-bold text-xs">Comprar</a>
                 </div>
-                <div class="bg-[#12141c] border border-gray-800 rounded-2xl p-5 hover:border-pink-500/50 transition glow-pink">
-                    <span class="text-xs font-mono bg-pink-500/20 text-pink-400 px-2.5 py-1 rounded-full font-bold">Válido 24h</span>
-                    <h4 class="text-xl font-black text-white mt-3">5.0 GB (5000MB)</h4>
-                    <p class="text-2xl font-black text-pink-500 my-2">180 MT</p>
-                    <a href="https://wa.me/258857695766?text=Ol%C3%A1%2C%20quero%20comprar%205GB%20Vodacom%20(Di%C3%A1rio)" target="_blank" class="block w-full py-2.5 rounded-xl bg-pink-500 hover:bg-pink-600 text-white font-bold text-center text-sm transition">Comprar Agora</a>
+                <div class="bg-[#12141c] border border-gray-800 rounded-xl p-4 text-center">
+                    <h4 class="font-bold text-white text-base">1024 MB</h4>
+                    <p class="text-lg font-black text-pink-500 my-1">24 MT</p>
+                    <a href="https://wa.me/258857695766?text=Ol%C3%A1%2C%20quero%20comprar%201024MB%20(24MT)" target="_blank" class="block w-full py-1.5 rounded-lg bg-pink-500 hover:bg-pink-600 text-white font-bold text-xs">Comprar</a>
+                </div>
+                <div class="bg-[#12141c] border border-gray-800 rounded-xl p-4 text-center">
+                    <h4 class="font-bold text-white text-base">2048 MB</h4>
+                    <p class="text-lg font-black text-pink-500 my-1">48 MT</p>
+                    <a href="https://wa.me/258857695766?text=Ol%C3%A1%2C%20quero%20comprar%202048MB%20(48MT)" target="_blank" class="block w-full py-1.5 rounded-lg bg-pink-500 hover:bg-pink-600 text-white font-bold text-xs">Comprar</a>
+                </div>
+                <div class="bg-[#12141c] border border-gray-800 rounded-xl p-4 text-center">
+                    <h4 class="font-bold text-white text-base">3072 MB</h4>
+                    <p class="text-lg font-black text-pink-500 my-1">72 MT</p>
+                    <a href="https://wa.me/258857695766?text=Ol%C3%A1%2C%20quero%20comprar%203072MB%20(72MT)" target="_blank" class="block w-full py-1.5 rounded-lg bg-pink-500 hover:bg-pink-600 text-white font-bold text-xs">Comprar</a>
+                </div>
+                <div class="bg-[#12141c] border border-gray-800 rounded-xl p-4 text-center">
+                    <h4 class="font-bold text-white text-base">4096 MB</h4>
+                    <p class="text-lg font-black text-pink-500 my-1">96 MT</p>
+                    <a href="https://wa.me/258857695766?text=Ol%C3%A1%2C%20quero%20comprar%204096MB%20(96MT)" target="_blank" class="block w-full py-1.5 rounded-lg bg-pink-500 hover:bg-pink-600 text-white font-bold text-xs">Comprar</a>
+                </div>
+                <div class="bg-[#12141c] border border-gray-800 rounded-xl p-4 text-center">
+                    <h4 class="font-bold text-white text-base">5120 MB</h4>
+                    <p class="text-lg font-black text-pink-500 my-1">120 MT</p>
+                    <a href="https://wa.me/258857695766?text=Ol%C3%A1%2C%20quero%20comprar%205120MB%20(120MT)" target="_blank" class="block w-full py-1.5 rounded-lg bg-pink-500 hover:bg-pink-600 text-white font-bold text-xs">Comprar</a>
+                </div>
+                <div class="bg-[#12141c] border border-gray-800 rounded-xl p-4 text-center">
+                    <h4 class="font-bold text-white text-base">10240 MB</h4>
+                    <p class="text-lg font-black text-pink-500 my-1">250 MT</p>
+                    <a href="https://wa.me/258857695766?text=Ol%C3%A1%2C%20quero%20comprar%2010240MB%20(250MT)" target="_blank" class="block w-full py-1.5 rounded-lg bg-pink-500 hover:bg-pink-600 text-white font-bold text-xs">Comprar</a>
                 </div>
             </div>
 
             <!-- PACOTES SEMANAIS -->
-            <h3 class="text-sm font-bold text-pink-400 uppercase tracking-wider mb-4 flex items-center gap-2"><i class="fa-solid fa-calendar-week"></i> Pacotes Semanais</h3>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-                <div class="bg-[#12141c] border border-gray-800 rounded-2xl p-5 hover:border-pink-500/50 transition">
-                    <span class="text-xs font-mono bg-purple-500/20 text-purple-400 px-2.5 py-1 rounded-full font-bold">Válido 7 Dias</span>
-                    <h4 class="text-xl font-black text-white mt-3">3.5 GB</h4>
-                    <p class="text-2xl font-black text-pink-500 my-2">250 MT</p>
-                    <a href="https://wa.me/258857695766?text=Ol%C3%A1%2C%20quero%20comprar%203.5GB%20Vodacom%20(Semanal)" target="_blank" class="block w-full py-2.5 rounded-xl bg-pink-500 hover:bg-pink-600 text-white font-bold text-center text-sm transition">Comprar Agora</a>
+            <h3 class="text-sm font-bold text-purple-400 uppercase tracking-wider mb-3 flex items-center gap-2"><i class="fa-solid fa-calendar-week"></i> Pacotes Semanais</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+                <div class="bg-[#12141c] border border-gray-800 rounded-xl p-4 flex items-center justify-between">
+                    <div>
+                        <h4 class="font-bold text-white text-lg">3.480 MB (3.4GB)</h4>
+                        <span class="text-xs text-gray-400">Válido 7 Dias</span>
+                    </div>
+                    <div class="text-right">
+                        <p class="text-xl font-black text-pink-500">95 MT</p>
+                        <a href="https://wa.me/258857695766?text=Ol%C3%A1%2C%20quero%20comprar%203480MB%20Semanal%20(95MT)" target="_blank" class="inline-block px-4 py-1.5 rounded-lg bg-pink-500 text-white font-bold text-xs mt-1">Comprar</a>
+                    </div>
                 </div>
-                <div class="bg-[#12141c] border border-gray-800 rounded-2xl p-5 hover:border-pink-500/50 transition">
-                    <span class="text-xs font-mono bg-purple-500/20 text-purple-400 px-2.5 py-1 rounded-full font-bold">Válido 7 Dias</span>
-                    <h4 class="text-xl font-black text-white mt-3">7.0 GB</h4>
-                    <p class="text-2xl font-black text-pink-500 my-2">450 MT</p>
-                    <a href="https://wa.me/258857695766?text=Ol%C3%A1%2C%20quero%20comprar%207GB%20Vodacom%20(Semanal)" target="_blank" class="block w-full py-2.5 rounded-xl bg-pink-500 hover:bg-pink-600 text-white font-bold text-center text-sm transition">Comprar Agora</a>
-                </div>
-                <div class="bg-[#12141c] border border-gray-800 rounded-2xl p-5 hover:border-pink-500/50 transition">
-                    <span class="text-xs font-mono bg-purple-500/20 text-purple-400 px-2.5 py-1 rounded-full font-bold">Válido 7 Dias</span>
-                    <h4 class="text-xl font-black text-white mt-3">12.0 GB</h4>
-                    <p class="text-2xl font-black text-pink-500 my-2">700 MT</p>
-                    <a href="https://wa.me/258857695766?text=Ol%C3%A1%2C%20quero%20comprar%2012GB%20Vodacom%20(Semanal)" target="_blank" class="block w-full py-2.5 rounded-xl bg-pink-500 hover:bg-pink-600 text-white font-bold text-center text-sm transition">Comprar Agora</a>
+                <div class="bg-[#12141c] border border-gray-800 rounded-xl p-4 flex items-center justify-between">
+                    <div>
+                        <h4 class="font-bold text-white text-lg">5.300 MB (5.3GB)</h4>
+                        <span class="text-xs text-gray-400">Válido 7 Dias</span>
+                    </div>
+                    <div class="text-right">
+                        <p class="text-xl font-black text-pink-500">140 MT</p>
+                        <a href="https://wa.me/258857695766?text=Ol%C3%A1%2C%20quero%20comprar%205300MB%20Semanal%20(140MT)" target="_blank" class="inline-block px-4 py-1.5 rounded-lg bg-pink-500 text-white font-bold text-xs mt-1">Comprar</a>
+                    </div>
                 </div>
             </div>
 
-            <!-- PACOTES MENSAIS E DIAMANTE+ -->
-            <h3 class="text-sm font-bold text-pink-400 uppercase tracking-wider mb-4 flex items-center gap-2"><i class="fa-solid fa-gem"></i> Pacotes Mensais & Diamante+</h3>
+            <!-- PACOTES MENSAIS -->
+            <h3 class="text-sm font-bold text-yellow-400 uppercase tracking-wider mb-3 flex items-center gap-2"><i class="fa-solid fa-calendar-days"></i> Pacotes Mensais</h3>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-8">
+                <div class="bg-[#12141c] border border-gray-800 rounded-xl p-3 text-center">
+                    <h4 class="font-bold text-white text-sm">2.857 MB</h4>
+                    <p class="text-base font-black text-pink-500 my-1">90 MT</p>
+                    <a href="https://wa.me/258857695766?text=Ol%C3%A1%2C%20quero%20comprar%202857MB%20Mensal%20(90MT)" target="_blank" class="block w-full py-1 rounded bg-pink-500 text-white font-bold text-[11px]">Comprar</a>
+                </div>
+                <div class="bg-[#12141c] border border-gray-800 rounded-xl p-3 text-center">
+                    <h4 class="font-bold text-white text-sm">5.000 MB</h4>
+                    <p class="text-base font-black text-pink-500 my-1">160 MT</p>
+                    <a href="https://wa.me/258857695766?text=Ol%C3%A1%2C%20quero%20comprar%205000MB%20Mensal%20(160MT)" target="_blank" class="block w-full py-1 rounded bg-pink-500 text-white font-bold text-[11px]">Comprar</a>
+                </div>
+                <div class="bg-[#12141c] border border-gray-800 rounded-xl p-3 text-center">
+                    <h4 class="font-bold text-white text-sm">7.000 MB</h4>
+                    <p class="text-base font-black text-pink-500 my-1">195 MT</p>
+                    <a href="https://wa.me/258857695766?text=Ol%C3%A1%2C%20quero%20comprar%207000MB%20Mensal%20(195MT)" target="_blank" class="block w-full py-1 rounded bg-pink-500 text-white font-bold text-[11px]">Comprar</a>
+                </div>
+                <div class="bg-[#12141c] border border-gray-800 rounded-xl p-3 text-center">
+                    <h4 class="font-bold text-white text-sm">8.000 MB</h4>
+                    <p class="text-base font-black text-pink-500 my-1">225 MT</p>
+                    <a href="https://wa.me/258857695766?text=Ol%C3%A1%2C%20quero%20comprar%208000MB%20Mensal%20(225MT)" target="_blank" class="block w-full py-1 rounded bg-pink-500 text-white font-bold text-[11px]">Comprar</a>
+                </div>
+                <div class="bg-[#12141c] border border-gray-800 rounded-xl p-3 text-center">
+                    <h4 class="font-bold text-white text-sm">10.000 MB</h4>
+                    <p class="text-base font-black text-pink-500 my-1">285 MT</p>
+                    <a href="https://wa.me/258857695766?text=Ol%C3%A1%2C%20quero%20comprar%2010000MB%20Mensal%20(285MT)" target="_blank" class="block w-full py-1 rounded bg-pink-500 text-white font-bold text-[11px]">Comprar</a>
+                </div>
+                <div class="bg-[#12141c] border border-gray-800 rounded-xl p-3 text-center">
+                    <h4 class="font-bold text-white text-sm">13.000 MB</h4>
+                    <p class="text-base font-black text-pink-500 my-1">375 MT</p>
+                    <a href="https://wa.me/258857695766?text=Ol%C3%A1%2C%20quero%20comprar%2013000MB%20Mensal%20(375MT)" target="_blank" class="block w-full py-1 rounded bg-pink-500 text-white font-bold text-[11px]">Comprar</a>
+                </div>
+                <div class="bg-[#12141c] border border-gray-800 rounded-xl p-3 text-center">
+                    <h4 class="font-bold text-white text-sm">17.000 MB</h4>
+                    <p class="text-base font-black text-pink-500 my-1">485 MT</p>
+                    <a href="https://wa.me/258857695766?text=Ol%C3%A1%2C%20quero%20comprar%2017000MB%20Mensal%20(485MT)" target="_blank" class="block w-full py-1 rounded bg-pink-500 text-white font-bold text-[11px]">Comprar</a>
+                </div>
+                <div class="bg-[#12141c] border border-gray-800 rounded-xl p-3 text-center">
+                    <h4 class="font-bold text-white text-sm">20.000 MB</h4>
+                    <p class="text-base font-black text-pink-500 my-1">560 MT</p>
+                    <a href="https://wa.me/258857695766?text=Ol%C3%A1%2C%20quero%20comprar%2020000MB%20Mensal%20(560MT)" target="_blank" class="block w-full py-1 rounded bg-pink-500 text-white font-bold text-[11px]">Comprar</a>
+                </div>
+            </div>
+
+            <!-- PACOTES VODACOM COMBO (CHAMADAS + SMS + GB) -->
+            <h3 class="text-sm font-bold text-red-500 uppercase tracking-wider mb-3 flex items-center gap-2"><i class="fa-solid fa-phone"></i> Vodacom Combo (Chamadas + SMS Ilimitadas + GB) - 30 Dias</h3>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div class="bg-[#12141c] border border-pink-500/40 rounded-2xl p-5 glow-pink">
-                    <span class="text-xs font-mono bg-yellow-500/20 text-yellow-400 px-2.5 py-1 rounded-full font-bold">Válido 30 Dias</span>
-                    <h4 class="text-xl font-black text-white mt-3">20.0 GB Mensal</h4>
-                    <p class="text-2xl font-black text-pink-500 my-2">1200 MT</p>
-                    <a href="https://wa.me/258857695766?text=Ol%C3%A1%2C%20quero%20comprar%2020GB%20Vodacom%20(Mensal)" target="_blank" class="block w-full py-2.5 rounded-xl bg-pink-500 hover:bg-pink-600 text-white font-bold text-center text-sm transition">Comprar Agora</a>
+                <div class="bg-[#12141c] border border-red-500/30 rounded-2xl p-4 flex items-center justify-between">
+                    <div>
+                        <h4 class="font-bold text-white text-base">Chamadas + SMS Ilimitadas + 11GB</h4>
+                        <span class="text-xs text-gray-400">Validade: 30 Dias</span>
+                    </div>
+                    <div class="text-right">
+                        <p class="text-xl font-black text-red-500">450 MT</p>
+                        <a href="https://wa.me/258857695766?text=Ol%C3%A1%2C%20quero%20comprar%20Combo%20Vodacom%2011GB%20(450MT)" target="_blank" class="inline-block px-4 py-1.5 rounded-lg bg-red-600 text-white font-bold text-xs mt-1">Comprar</a>
+                    </div>
                 </div>
-                <div class="bg-[#12141c] border border-red-500/40 rounded-2xl p-5 glow-red">
-                    <span class="text-xs font-mono bg-red-500/20 text-red-400 px-2.5 py-1 rounded-full font-bold">VIP Diamante+</span>
-                    <h4 class="text-xl font-black text-white mt-3">50.0 GB Ilimitado VIP</h4>
-                    <p class="text-2xl font-black text-red-500 my-2">2500 MT</p>
-                    <a href="https://wa.me/258857695766?text=Ol%C3%A1%2C%20quero%20comprar%2050GB%20Vodacom%20(Diamante)" target="_blank" class="block w-full py-2.5 rounded-xl bg-red-600 hover:bg-red-700 text-white font-bold text-center text-sm transition">Comprar VIP</a>
+                <div class="bg-[#12141c] border border-red-500/30 rounded-2xl p-4 flex items-center justify-between">
+                    <div>
+                        <h4 class="font-bold text-white text-base">Chamadas + SMS Ilimitadas + 15GB</h4>
+                        <span class="text-xs text-gray-400">Validade: 30 Dias</span>
+                    </div>
+                    <div class="text-right">
+                        <p class="text-xl font-black text-red-500">580 MT</p>
+                        <a href="https://wa.me/258857695766?text=Ol%C3%A1%2C%20quero%20comprar%20Combo%20Vodacom%2015GB%20(580MT)" target="_blank" class="inline-block px-4 py-1.5 rounded-lg bg-red-600 text-white font-bold text-xs mt-1">Comprar</a>
+                    </div>
                 </div>
+                <div class="bg-[#12141c] border border-red-500/30 rounded-2xl p-4 flex items-center justify-between">
+                    <div>
+                        <h4 class="font-bold text-white text-base">Chamadas + SMS Ilimitadas + 21GB</h4>
+                        <span class="text-xs text-gray-400">Validade: 30 Dias</span>
+                    </div>
+                    <div class="text-right">
+                        <p class="text-xl font-black text-red-500">720 MT</p>
+                        <a href="https://wa.me/258857695766?text=Ol%C3%A1%2C%20quero%20comprar%20Combo%20Vodacom%2021GB%20(720MT)" target="_blank" class="inline-block px-4 py-1.5 rounded-lg bg-red-600 text-white font-bold text-xs mt-1">Comprar</a>
+                    </div>
+                </div>
+                <div class="bg-[#12141c] border border-red-500/30 rounded-2xl p-4 flex items-center justify-between">
+                    <div>
+                        <h4 class="font-bold text-white text-base">Chamadas + SMS Ilimitadas + 30GB</h4>
+                        <span class="text-xs text-gray-400">Validade: 30 Dias</span>
+                    </div>
+                    <div class="text-right">
+                        <p class="text-xl font-black text-red-500">970 MT</p>
+                        <a href="https://wa.me/258857695766?text=Ol%C3%A1%2C%20quero%20comprar%20Combo%20Vodacom%2030GB%20(970MT)" target="_blank" class="inline-block px-4 py-1.5 rounded-lg bg-red-600 text-white font-bold text-xs mt-1">Comprar</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-4 p-4 rounded-xl bg-yellow-500/10 border border-yellow-500/30 text-yellow-400 text-xs flex items-center gap-2">
+                <i class="fa-solid fa-triangle-exclamation text-base"></i>
+                <span><strong>Nota Importante:</strong> Para os pacotes mensais e semanais não podes ter Txuna Crédito no momento da transferência!</span>
             </div>
         </section>
 
-        <!-- ABA MOVITEL -->
+        <!-- ================= ABA 3: MOVITEL ================= -->
         <section id="tab-movitel" class="tab-content hidden">
             <div class="flex items-center gap-3 mb-6">
                 <div class="w-10 h-10 rounded-lg bg-yellow-500/20 border border-yellow-500 flex items-center justify-center text-yellow-400 font-bold text-xl">M</div>
@@ -306,28 +429,28 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div class="bg-[#12141c] border border-gray-800 rounded-2xl p-5 hover:border-yellow-500/50 transition">
+                <div class="bg-[#12141c] border border-gray-800 rounded-2xl p-5">
                     <span class="text-xs font-mono bg-yellow-500/20 text-yellow-400 px-2.5 py-1 rounded-full font-bold">Diário</span>
                     <h4 class="text-xl font-black text-white mt-3">1.5 GB Movitel</h4>
                     <p class="text-2xl font-black text-yellow-400 my-2">50 MT</p>
-                    <a href="https://wa.me/258857695766?text=Ol%C3%A1%2C%20quero%20comprar%201.5GB%20Movitel" target="_blank" class="block w-full py-2.5 rounded-xl bg-yellow-500 hover:bg-yellow-600 text-black font-bold text-center text-sm transition">Comprar Movitel</a>
+                    <a href="https://wa.me/258857695766?text=Ol%C3%A1%2C%20quero%20comprar%201.5GB%20Movitel" target="_blank" class="block w-full py-2.5 rounded-xl bg-yellow-500 text-black font-bold text-center text-sm">Comprar Movitel</a>
                 </div>
-                <div class="bg-[#12141c] border border-gray-800 rounded-2xl p-5 hover:border-yellow-500/50 transition">
+                <div class="bg-[#12141c] border border-gray-800 rounded-2xl p-5">
                     <span class="text-xs font-mono bg-yellow-500/20 text-yellow-400 px-2.5 py-1 rounded-full font-bold">Semanal</span>
                     <h4 class="text-xl font-black text-white mt-3">4.0 GB Movitel</h4>
                     <p class="text-2xl font-black text-yellow-400 my-2">200 MT</p>
-                    <a href="https://wa.me/258857695766?text=Ol%C3%A1%2C%20quero%20comprar%204GB%20Movitel" target="_blank" class="block w-full py-2.5 rounded-xl bg-yellow-500 hover:bg-yellow-600 text-black font-bold text-center text-sm transition">Comprar Movitel</a>
+                    <a href="https://wa.me/258857695766?text=Ol%C3%A1%2C%20quero%20comprar%204GB%20Movitel" target="_blank" class="block w-full py-2.5 rounded-xl bg-yellow-500 text-black font-bold text-center text-sm">Comprar Movitel</a>
                 </div>
-                <div class="bg-[#12141c] border border-gray-800 rounded-2xl p-5 hover:border-yellow-500/50 transition">
+                <div class="bg-[#12141c] border border-gray-800 rounded-2xl p-5">
                     <span class="text-xs font-mono bg-yellow-500/20 text-yellow-400 px-2.5 py-1 rounded-full font-bold">Mensal</span>
                     <h4 class="text-xl font-black text-white mt-3">15.0 GB Movitel</h4>
                     <p class="text-2xl font-black text-yellow-400 my-2">950 MT</p>
-                    <a href="https://wa.me/258857695766?text=Ol%C3%A1%2C%20quero%20comprar%2015GB%20Movitel" target="_blank" class="block w-full py-2.5 rounded-xl bg-yellow-500 hover:bg-yellow-600 text-black font-bold text-center text-sm transition">Comprar Movitel</a>
+                    <a href="https://wa.me/258857695766?text=Ol%C3%A1%2C%20quero%20comprar%2015GB%20Movitel" target="_blank" class="block w-full py-2.5 rounded-xl bg-yellow-500 text-black font-bold text-center text-sm">Comprar Movitel</a>
                 </div>
             </div>
         </section>
 
-        <!-- ABA FREE FIRE -->
+        <!-- ================= ABA 4: FREE FIRE ================= -->
         <section id="tab-freefire" class="tab-content hidden">
             <div class="flex items-center gap-3 mb-6">
                 <div class="w-10 h-10 rounded-lg bg-orange-500/20 border border-orange-500 flex items-center justify-center text-orange-400 font-bold text-xl"><i class="fa-solid fa-fire"></i></div>
@@ -338,74 +461,99 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div class="bg-[#12141c] border border-gray-800 rounded-2xl p-5 hover:border-orange-500/50 transition">
+                <div class="bg-[#12141c] border border-gray-800 rounded-2xl p-5">
                     <span class="text-xs font-mono bg-orange-500/20 text-orange-400 px-2.5 py-1 rounded-full font-bold">Via ID</span>
                     <h4 class="text-xl font-black text-white mt-3">110 Diamantes</h4>
                     <p class="text-2xl font-black text-orange-400 my-2">75 MT</p>
-                    <a href="https://wa.me/258857695766?text=Ol%C3%A1%2C%20quero%20recargar%20110%20Diamantes%20Free%20Fire" target="_blank" class="block w-full py-2.5 rounded-xl bg-orange-500 hover:bg-orange-600 text-white font-bold text-center text-sm transition">Recargar FF</a>
+                    <a href="https://wa.me/258857695766?text=Ol%C3%A1%2C%20quero%20recargar%20110%20Diamantes%20Free%20Fire" target="_blank" class="block w-full py-2.5 rounded-xl bg-orange-500 text-white font-bold text-center text-sm">Recargar FF</a>
                 </div>
-                <div class="bg-[#12141c] border border-gray-800 rounded-2xl p-5 hover:border-orange-500/50 transition">
+                <div class="bg-[#12141c] border border-gray-800 rounded-2xl p-5">
                     <span class="text-xs font-mono bg-orange-500/20 text-orange-400 px-2.5 py-1 rounded-full font-bold">Via ID</span>
                     <h4 class="text-xl font-black text-white mt-3">580 Diamantes</h4>
                     <p class="text-2xl font-black text-orange-400 my-2">360 MT</p>
-                    <a href="https://wa.me/258857695766?text=Ol%C3%A1%2C%20quero%20recargar%20580%20Diamantes%20Free%20Fire" target="_blank" class="block w-full py-2.5 rounded-xl bg-orange-500 hover:bg-orange-600 text-white font-bold text-center text-sm transition">Recargar FF</a>
+                    <a href="https://wa.me/258857695766?text=Ol%C3%A1%2C%20quero%20recargar%20580%20Diamantes%20Free%20Fire" target="_blank" class="block w-full py-2.5 rounded-xl bg-orange-500 text-white font-bold text-center text-sm">Recargar FF</a>
                 </div>
-                <div class="bg-[#12141c] border border-gray-800 rounded-2xl p-5 hover:border-orange-500/50 transition">
-                    <span class="text-xs font-mono bg-orange-500/20 text-orange-400 px-2.5 py-1 rounded-full font-bold">Passe de Elite</span>
-                    <h4 class="text-xl font-black text-white mt-3">Cartão Semanal VIP</h4>
+                <div class="bg-[#12141c] border border-gray-800 rounded-2xl p-5">
+                    <span class="text-xs font-mono bg-orange-500/20 text-orange-400 px-2.5 py-1 rounded-full font-bold">Passe</span>
+                    <h4 class="text-xl font-black text-white mt-3">Assinatura Semanal VIP</h4>
                     <p class="text-2xl font-black text-orange-400 my-2">150 MT</p>
-                    <a href="https://wa.me/258857695766?text=Ol%C3%A1%2C%20quero%20comprar%20Cart%C3%A3o%20Semanal%20Free%20Fire" target="_blank" class="block w-full py-2.5 rounded-xl bg-orange-500 hover:bg-orange-600 text-white font-bold text-center text-sm transition">Comprar Passe</a>
+                    <a href="https://wa.me/258857695766?text=Ol%C3%A1%2C%20quero%20comprar%20Cart%C3%A3o%20Semanal%20Free%20Fire" target="_blank" class="block w-full py-2.5 rounded-xl bg-orange-500 text-white font-bold text-center text-sm">Comprar Passe</a>
                 </div>
             </div>
         </section>
 
-        <!-- ABA NETFLIX -->
+        <!-- ================= ABA 5: NETFLIX ================= -->
         <section id="tab-netflix" class="tab-content hidden">
             <div class="flex items-center gap-3 mb-6">
                 <div class="w-10 h-10 rounded-lg bg-red-600/20 border border-red-600 flex items-center justify-center text-red-500 font-bold text-xl"><i class="fa-solid fa-tv"></i></div>
                 <div>
-                    <h2 class="text-2xl font-black text-white">Contas Netflix Premium 4K</h2>
-                    <p class="text-xs text-gray-400">Telas privadas com PIN exclusivo e garantia de suporte</p>
+                    <h2 class="text-2xl font-black text-white">Perfis Netflix Premium 4K</h2>
+                    <p class="text-xs text-gray-400">Telas privadas com senha exclusiva</p>
                 </div>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div class="bg-[#12141c] border border-gray-800 rounded-2xl p-5 hover:border-red-600/50 transition">
-                    <span class="text-xs font-mono bg-red-600/20 text-red-400 px-2.5 py-1 rounded-full font-bold">1 Tela Privada</span>
-                    <h4 class="text-xl font-black text-white mt-3">Netflix Ultra HD 30 Dias</h4>
+                <div class="bg-[#12141c] border border-gray-800 rounded-2xl p-5">
+                    <span class="text-xs font-mono bg-red-600/20 text-red-400 px-2.5 py-1 rounded-full font-bold">1 Perfil Privado</span>
+                    <h4 class="text-xl font-black text-white mt-3">Netflix Ultra HD (30 Dias)</h4>
                     <p class="text-2xl font-black text-red-500 my-2">250 MT</p>
-                    <a href="https://wa.me/258857695766?text=Ol%C3%A1%2C%20quero%20comprar%201%20Tela%20Netflix%2030%20Dias" target="_blank" class="block w-full py-2.5 rounded-xl bg-red-600 hover:bg-red-700 text-white font-bold text-center text-sm transition">Comprar Tela</a>
+                    <a href="https://wa.me/258857695766?text=Ol%C3%A1%2C%20quero%20comprar%201%20Tela%20Netflix%2030%20Dias" target="_blank" class="block w-full py-2.5 rounded-xl bg-red-600 text-white font-bold text-center text-sm">Comprar Tela</a>
                 </div>
-                <div class="bg-[#12141c] border border-gray-800 rounded-2xl p-5 hover:border-red-600/50 transition">
+                <div class="bg-[#12141c] border border-gray-800 rounded-2xl p-5">
                     <span class="text-xs font-mono bg-red-600/20 text-red-400 px-2.5 py-1 rounded-full font-bold">Conta Completa</span>
                     <h4 class="text-xl font-black text-white mt-3">Netflix 5 Telas Privadas</h4>
                     <p class="text-2xl font-black text-red-500 my-2">900 MT</p>
-                    <a href="https://wa.me/258857695766?text=Ol%C3%A1%2C%20quero%20comprar%20Conta%20Completa%20Netflix" target="_blank" class="block w-full py-2.5 rounded-xl bg-red-600 hover:bg-red-700 text-white font-bold text-center text-sm transition">Comprar Conta</a>
+                    <a href="https://wa.me/258857695766?text=Ol%C3%A1%2C%20quero%20comprar%20Conta%20Completa%20Netflix" target="_blank" class="block w-full py-2.5 rounded-xl bg-red-600 text-white font-bold text-center text-sm">Comprar Conta</a>
                 </div>
             </div>
         </section>
 
-        <!-- ABA BOTS WHATSAPP -->
+        <!-- ================= ABA 6: SERVIÇOS & AUTOMAÇÕES ================= -->
         <section id="tab-bots" class="tab-content hidden">
             <div class="flex items-center gap-3 mb-6">
                 <div class="w-10 h-10 rounded-lg bg-emerald-500/20 border border-emerald-500 flex items-center justify-center text-emerald-400 font-bold text-xl"><i class="fa-solid fa-robot"></i></div>
                 <div>
-                    <h2 class="text-2xl font-black text-white">Sistemas BL4CK BOT (WhatsApp Automação)</h2>
-                    <p class="text-xs text-gray-400">Bots de administração, revenda de megas e moderação de grupos</p>
+                    <h2 class="text-2xl font-black text-white">Sistemas & Automações Digitais</h2>
+                    <p class="text-xs text-gray-400">Sistemas inteligentes de atendimento e revenda da marca BL4CK_SOLUTIONS</p>
                 </div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div class="bg-[#12141c] border border-gray-800 rounded-2xl p-5 hover:border-emerald-500/50 transition">
-                    <span class="text-xs font-mono bg-emerald-500/20 text-emerald-400 px-2.5 py-1 rounded-full font-bold">Node.js + Baileys</span>
-                    <h4 class="text-xl font-black text-white mt-3">BL4CK BOT Completo</h4>
-                    <p class="text-2xl font-black text-emerald-400 my-2">Sob Consulta</p>
-                    <a href="https://wa.me/258857695766?text=Ol%C3%A1%2C%20tenho%20interesse%20no%20BL4CK%20BOT" target="_blank" class="block w-full py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-black font-bold text-center text-sm transition">Solicitar Bot</a>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- CARD BL4CK BOT -->
+                <div class="bg-[#12141c] border border-emerald-500/30 rounded-2xl p-6 glow-pink">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="text-xs font-mono bg-emerald-500/20 text-emerald-400 px-2.5 py-1 rounded-full font-bold">Automação VIP</span>
+                        <i class="fa-solid fa-robot text-emerald-400 text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-black text-white">BL4CK BOT</h3>
+                    <p class="text-xs text-gray-300 mt-2 leading-relaxed">
+                        Sistema completo de atendimento automático para revenda de megabytes, envio de tabelas, menus interativos e gerenciamento automatizado de clientes.
+                    </p>
+                    <div class="mt-4 pt-4 border-t border-gray-800 flex items-center justify-between">
+                        <span class="text-sm font-bold text-emerald-400">Disponível Sob Consulta</span>
+                        <a href="https://wa.me/258857695766?text=Ol%C3%A1%2C%20tenho%20interesse%20no%20sistema%20BL4CK%20BOT" target="_blank" class="px-4 py-2 rounded-xl bg-emerald-500 text-black font-bold text-xs hover:bg-emerald-400 transition">Solicitar Informações</a>
+                    </div>
+                </div>
+
+                <!-- CARD BL4CK X -->
+                <div class="bg-[#12141c] border border-purple-500/30 rounded-2xl p-6">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="text-xs font-mono bg-purple-500/20 text-purple-400 px-2.5 py-1 rounded-full font-bold">Edição Especial</span>
+                        <i class="fa-solid fa-bolt text-purple-400 text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-black text-white">BL4CK X</h3>
+                    <p class="text-xs text-gray-300 mt-2 leading-relaxed">
+                        Versão avançada para automação de vendas diretas, alta performance de resposta e integração com comandos rápidos para grupos e chats privados.
+                    </p>
+                    <div class="mt-4 pt-4 border-t border-gray-800 flex items-center justify-between">
+                        <span class="text-sm font-bold text-purple-400">Disponível Sob Consulta</span>
+                        <a href="https://wa.me/258857695766?text=Ol%C3%A1%2C%20tenho%20interesse%20no%20sistema%20BL4CK%20X" target="_blank" class="px-4 py-2 rounded-xl bg-purple-600 text-white font-bold text-xs hover:bg-purple-500 transition">Solicitar Informações</a>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- SEÇÃO: POR QUE COMPRAR COM A BL4CK_SOLUTIONS? (RESTALRADA INTEGRALMENTE) -->
+        <!-- SEÇÃO: POR QUE COMPRAR COM A BL4CK_SOLUTIONS? -->
         <section class="mt-16 pt-10 border-t border-gray-800">
             <div class="text-center max-w-2xl mx-auto mb-10">
                 <h2 class="text-2xl md:text-3xl font-black text-white">Por que comprar com a <span class="text-pink-500">BL4CK_SOLUTIONS</span>?</h2>
@@ -413,47 +561,47 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-                <div class="bg-[#12141c] border border-pink-500/20 rounded-2xl p-6 text-center hover:border-pink-500 transition">
+                <div class="bg-[#12141c] border border-pink-500/20 rounded-2xl p-6 text-center">
                     <div class="w-12 h-12 mx-auto rounded-xl bg-pink-500/10 text-pink-500 flex items-center justify-center text-2xl mb-4">
                         <i class="fa-solid fa-bolt"></i>
                     </div>
-                    <h3 class="font-bold text-white mb-2">Envios Automáticos</h3>
-                    <p class="text-xs text-gray-400">Seus megabytes e recargas são processados rapidamente após a confirmação do pagamento.</p>
+                    <h3 class="font-bold text-white mb-2">Envios Rápidos</h3>
+                    <p class="text-xs text-gray-400">Seus megabytes e serviços são processados rapidamente após a confirmação do pagamento.</p>
                 </div>
 
-                <div class="bg-[#12141c] border border-pink-500/20 rounded-2xl p-6 text-center hover:border-pink-500 transition">
+                <div class="bg-[#12141c] border border-pink-500/20 rounded-2xl p-6 text-center">
                     <div class="w-12 h-12 mx-auto rounded-xl bg-pink-500/10 text-pink-500 flex items-center justify-center text-2xl mb-4">
                         <i class="fa-solid fa-shield-cat"></i>
                     </div>
-                    <h3 class="font-bold text-white mb-2">Plataforma 100% Segura</h3>
-                    <p class="text-xs text-gray-400">Sistema antifraude rígido e proteção contra burladores. Seu saldo e dados protegidos.</p>
+                    <h3 class="font-bold text-white mb-2">100% Seguro</h3>
+                    <p class="text-xs text-gray-400">Proteção total e transparência em todas as transações realizadas.</p>
                 </div>
 
-                <div class="bg-[#12141c] border border-pink-500/20 rounded-2xl p-6 text-center hover:border-pink-500 transition">
+                <div class="bg-[#12141c] border border-pink-500/20 rounded-2xl p-6 text-center">
                     <div class="w-12 h-12 mx-auto rounded-xl bg-pink-500/10 text-pink-500 flex items-center justify-center text-2xl mb-4">
                         <i class="fa-solid fa-headset"></i>
                     </div>
-                    <h3 class="font-bold text-white mb-2">Suporte 24/7 Ativo</h3>
-                    <p class="text-xs text-gray-400">Atendimento humanizado pelo WhatsApp para resolver qualquer dúvida instantaneamente.</p>
+                    <h3 class="font-bold text-white mb-2">Suporte Ativo</h3>
+                    <p class="text-xs text-gray-400">Atendimento pelo WhatsApp para resolver qualquer dúvida rapidamente.</p>
                 </div>
 
-                <div class="bg-[#12141c] border border-pink-500/20 rounded-2xl p-6 text-center hover:border-pink-500 transition">
+                <div class="bg-[#12141c] border border-pink-500/20 rounded-2xl p-6 text-center">
                     <div class="w-12 h-12 mx-auto rounded-xl bg-pink-500/10 text-pink-500 flex items-center justify-center text-2xl mb-4">
                         <i class="fa-solid fa-star"></i>
                     </div>
                     <h3 class="font-bold text-white mb-2">Melhores Preços</h3>
-                    <p class="text-xs text-gray-400">Pacotes VIP e promoções diárias exclusivas para nossos clientes do grupo.</p>
+                    <p class="text-xs text-gray-400">Tabelas promocionais e vantagens exclusivas para membros do nosso grupo.</p>
                 </div>
             </div>
         </section>
 
     </main>
 
-    <!-- FOOTER / FALE CONOSCO (ÍCONES VISÍVEIS RESTAURADOS E LINKS ATUALIZADOS) -->
+    <!-- FOOTER / FALE CONOSCO -->
     <footer class="bg-[#12141c] border-t border-pink-500/20 py-10 px-4 mt-12">
         <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
             
-            <!-- COLUNA 1: MARCA -->
+            <!-- MARCA -->
             <div>
                 <div class="flex items-center gap-3 mb-3">
                     <div class="w-8 h-8 rounded-lg bg-pink-500/10 border border-pink-500/30 flex items-center justify-center">
@@ -465,34 +613,30 @@
                     </div>
                     <span class="font-black text-white text-base">BL4CK<span class="text-pink-500">_SOLUTIONS</span></span>
                 </div>
-                <p class="text-xs text-gray-400">Soluções digitais em revenda de megabytes, bots para WhatsApp e recargas de jogos online.</p>
+                <p class="text-xs text-gray-400">Soluções digitais em bots de atendimento, megabytes, sistemas e recargas de jogos online.</p>
             </div>
 
-            <!-- COLUNA 2: GRUPO WHATSAPP OFICIAL -->
+            <!-- GRUPO WHATSAPP -->
             <div>
-                <h4 class="font-bold text-white text-sm mb-3">Grupo VIP Oficial</h4>
+                <h4 class="font-bold text-white text-sm mb-3">Grupo Oficial</h4>
                 <a href="https://chat.whatsapp.com/Gsx6KZksBYCBKQuLV7X2lq?s=sh&p=i&ilr=4" target="_blank" class="inline-flex items-center gap-2 bg-green-600/20 border border-green-500/40 text-green-400 px-4 py-2 rounded-xl text-xs font-bold hover:bg-green-600 hover:text-white transition">
                     <i class="fa-brands fa-whatsapp text-lg"></i> Entrar no Grupo VIP WhatsApp
                 </a>
             </div>
 
-            <!-- COLUNA 3: FALE CONOSCO (COM ÍCONES SVG/FONT-AWESOME DENTRO DAS CORES) -->
+            <!-- REDES SOCIAIS / FALE CONOSCO -->
             <div>
                 <h4 class="font-bold text-white text-sm mb-3">Acompanhe Nossas Redes</h4>
                 <div class="flex items-center gap-3">
-                    <!-- WhatsApp (Verde) -->
                     <a href="https://wa.me/258857695766" target="_blank" class="w-10 h-10 rounded-full bg-green-600/20 border border-green-500 text-green-400 flex items-center justify-center hover:bg-green-600 hover:text-white transition" title="WhatsApp Direto">
                         <i class="fa-brands fa-whatsapp text-lg"></i>
                     </a>
-                    <!-- Facebook (Azul) -->
                     <a href="https://facebook.com" target="_blank" class="w-10 h-10 rounded-full bg-blue-600/20 border border-blue-500 text-blue-400 flex items-center justify-center hover:bg-blue-600 hover:text-white transition" title="Facebook">
                         <i class="fa-brands fa-facebook-f text-lg"></i>
                     </a>
-                    <!-- Instagram (Rosa/Roxo) -->
                     <a href="https://instagram.com" target="_blank" class="w-10 h-10 rounded-full bg-pink-600/20 border border-pink-500 text-pink-400 flex items-center justify-center hover:bg-pink-600 hover:text-white transition" title="Instagram">
                         <i class="fa-brands fa-instagram text-lg"></i>
                     </a>
-                    <!-- YouTube (Vermelho) -->
                     <a href="https://youtube.com" target="_blank" class="w-10 h-10 rounded-full bg-red-600/20 border border-red-500 text-red-500 flex items-center justify-center hover:bg-red-600 hover:text-white transition" title="YouTube">
                         <i class="fa-brands fa-youtube text-lg"></i>
                     </a>
@@ -501,18 +645,18 @@
 
         </div>
 
+        <!-- COPYRIGHT -->
         <div class="max-w-7xl mx-auto pt-6 border-t border-gray-800 flex flex-col md:flex-row items-center justify-between text-[11px] text-gray-500">
-            <p>&copy; 2026 BL4CK_SOLUTIONS. Todos os direitos reservados. Suporte: +258 857 695 766</p>
+            <p>&copy; 2026 bl4ck_solutions. Todos os direitos reservados.</p>
             <button onclick="scrollToTop()" class="mt-2 md:mt-0 text-pink-400 hover:underline flex items-center gap-1">
                 <i class="fa-solid fa-arrow-up"></i> Voltar ao Topo
             </button>
         </div>
     </footer>
 
-    <!-- JAVASCRIPT LOGIC (ROLANDO AO TOPO & CONTROLE DE ABAS) -->
+    <!-- JAVASCRIPT LOGIC -->
     <script>
-        // Função para trocar de abas e subir suavemente ao início da página
-        function switchTab(tabId) {
+        function switchTab(tabId, addHistory = true) {
             // Esconde todas as abas
             const tabs = document.querySelectorAll('.tab-content');
             tabs.forEach(tab => tab.classList.add('hidden'));
@@ -523,17 +667,36 @@
                 targetTab.classList.remove('hidden');
             }
 
-            // Esconde o menu mobile se estiver aberto
+            // Fecha o menu mobile se estiver aberto
             const mobileMenu = document.getElementById('mobileMenu');
-            if (!mobileMenu.classList.contains('hidden')) {
+            if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
                 mobileMenu.classList.add('hidden');
             }
 
-            // Rola suavemente para o início da página
+            // Registra a mudança no histórico para suporte ao botão voltar
+            if (addHistory) {
+                history.pushState({ tab: tabId }, '', '#' + tabId);
+            }
+
             scrollToTop();
         }
 
-        // Função de Scroll ao Topo
+        // Detecta quando o usuário clica no botão voltar (Android) ou desliza a tela (iPhone)
+        window.addEventListener('popstate', function(event) {
+            if (event.state && event.state.tab) {
+                switchTab(event.state.tab, false);
+            } else {
+                switchTab('home', false);
+            }
+        });
+
+        // Define o estado inicial da página no histórico
+        window.addEventListener('DOMContentLoaded', function() {
+            const initialTab = window.location.hash ? window.location.hash.replace('#', '') : 'home';
+            switchTab(initialTab, false);
+            history.replaceState({ tab: initialTab }, '', '#' + initialTab);
+        });
+
         function scrollToTop() {
             window.scrollTo({
                 top: 0,
@@ -541,13 +704,11 @@
             });
         }
 
-        // Toggle do Menu Mobile Hambúrguer
         function toggleMobileMenu() {
             const mobileMenu = document.getElementById('mobileMenu');
             mobileMenu.classList.toggle('hidden');
         }
 
-        // Toggle do Modo Claro / Modo Escuro
         function toggleTheme() {
             const html = document.documentElement;
             if (html.classList.contains('dark')) {
