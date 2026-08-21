@@ -31,7 +31,6 @@
         body {
             font-family: 'Montserrat', sans-serif;
         }
-        /* Efeito de transição suave global para troca de tema */
         *, ::before, ::after {
             transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
         }
@@ -60,7 +59,7 @@
 <body class="bg-slate-100 text-slate-800 dark:bg-[#0b0c10] dark:text-gray-100 min-h-screen flex flex-col justify-between" id="top">
 
     <!-- HEADER / NAV -->
-    <header class="sticky top-0 z-50 bg-white/95 dark:bg-[#0b0c10]/95 backdrop-blur-md border-b border-pink-500/20 px-4 py-3 shadow-sm dark:shadow-none">
+    <header class="sticky top-0 z-40 bg-white/95 dark:bg-[#0b0c10]/95 backdrop-blur-md border-b border-pink-500/20 px-4 py-3 shadow-sm dark:shadow-none">
         <div class="max-w-7xl mx-auto flex items-center justify-between">
             
             <!-- LOGO -->
@@ -87,35 +86,53 @@
                 <button onclick="switchTab('bots')" class="hover:text-pink-500 transition">Serviços & Automações</button>
             </nav>
 
-            <!-- DARK / LIGHT TOGGLE DESKTOP & MOBILE MENU -->
+            <!-- DARK / LIGHT TOGGLE DESKTOP & MOBILE MENU BUTTON -->
             <div class="flex items-center gap-3">
-                <button onclick="toggleTheme()" class="p-2.5 rounded-xl border border-slate-300 dark:border-gray-700 bg-slate-200/60 dark:bg-gray-800/50 text-slate-700 dark:text-yellow-400 hover:border-pink-500 transition-transform active:scale-95" title="Alternar Tema">
+                <button onclick="toggleTheme()" class="p-2.5 rounded-xl border border-slate-300 dark:border-gray-700 bg-slate-200/60 dark:bg-gray-800/50 text-slate-700 dark:text-yellow-400 hover:border-pink-500 transition-transform active:scale-95" title="Alternar Tema" aria-label="Alternar Tema">
                     <i class="fa-solid fa-sun dark:block hidden text-amber-400 text-lg"></i>
                     <i class="fa-solid fa-moon dark:hidden block text-indigo-600 text-lg"></i>
                 </button>
 
                 <!-- BOTÃO MENU HAMBÚRGUER -->
-                <button onclick="toggleMobileMenu()" class="md:hidden p-2 text-slate-700 dark:text-gray-300 hover:text-pink-500">
+                <button id="menuBtn" onclick="toggleMobileMenu()" aria-expanded="false" aria-label="Abrir Menu" class="md:hidden p-2 text-slate-700 dark:text-gray-300 hover:text-pink-500 focus:outline-none">
                     <i class="fa-solid fa-bars text-xl"></i>
                 </button>
             </div>
         </div>
+    </header>
 
-        <!-- MENU MOBILE DROPDOWN -->
-        <div id="mobileMenu" class="hidden md:hidden bg-white dark:bg-[#12141c] border-b border-pink-500/20 px-4 py-4 mt-2 space-y-3 text-slate-800 dark:text-gray-200">
-            <button onclick="switchTab('home')" class="block w-full text-left py-2 px-3 rounded hover:bg-pink-500/10 text-pink-500 font-bold">Página Inicial</button>
-            <button onclick="switchTab('vodacom')" class="block w-full text-left py-2 px-3 rounded hover:bg-pink-500/10 hover:text-pink-500">Vodacom Megabytes</button>
-            <button onclick="switchTab('freefire')" class="block w-full text-left py-2 px-3 rounded hover:bg-pink-500/10 hover:text-pink-500">Free Fire Diamantes</button>
-            <button onclick="switchTab('netflix')" class="block w-full text-left py-2 px-3 rounded hover:bg-pink-500/10 hover:text-pink-500">Contas Netflix</button>
-            <button onclick="switchTab('bots')" class="block w-full text-left py-2 px-3 rounded hover:bg-pink-500/10 hover:text-pink-500">Serviços & Automações</button>
-            <div class="pt-2 border-t border-slate-200 dark:border-gray-800 flex items-center justify-between">
-                <span class="text-xs text-gray-500 dark:text-gray-400">Modo de Exibição</span>
-                <button onclick="toggleTheme()" class="px-3 py-1.5 rounded-lg border border-pink-500/30 bg-pink-500/10 text-xs text-pink-500 font-semibold flex items-center gap-2">
-                    <i class="fa-solid fa-circle-half-stroke"></i> Alternar Tema
+    <!-- BACKDROP PARA FECHAR MENU MOBILE -->
+    <div id="menuBackdrop" onclick="toggleMobileMenu()" class="fixed inset-0 bg-black/60 z-50 hidden md:hidden transition-opacity duration-300 opacity-0"></div>
+
+    <!-- MENU MOBILE LATERAL (OFF-CANVAS) -->
+    <div id="mobileMenu" class="fixed top-0 right-0 h-full w-72 bg-white dark:bg-[#12141c] border-l border-pink-500/20 z-50 transform translate-x-full transition-transform duration-300 ease-in-out md:hidden flex flex-col justify-between p-5 shadow-2xl">
+        <div>
+            <!-- CABEÇALHO DO MENU LATERAL -->
+            <div class="flex items-center justify-between pb-4 border-b border-slate-200 dark:border-gray-800">
+                <span class="font-bold text-sm tracking-wider text-slate-900 dark:text-white uppercase">Navegação</span>
+                <button onclick="toggleMobileMenu()" aria-label="Fechar Menu" class="p-2 text-gray-500 hover:text-pink-500 focus:outline-none">
+                    <i class="fa-solid fa-xmark text-xl"></i>
                 </button>
             </div>
+
+            <!-- LINKS DO MENU -->
+            <div class="mt-6 space-y-2 text-slate-800 dark:text-gray-200 text-sm">
+                <button onclick="switchTab('home')" class="block w-full text-left py-2.5 px-3 rounded-xl hover:bg-pink-500/10 text-pink-500 font-bold transition">Página Inicial</button>
+                <button onclick="switchTab('vodacom')" class="block w-full text-left py-2.5 px-3 rounded-xl hover:bg-pink-500/10 hover:text-pink-500 transition">Vodacom Megabytes</button>
+                <button onclick="switchTab('freefire')" class="block w-full text-left py-2.5 px-3 rounded-xl hover:bg-pink-500/10 hover:text-pink-500 transition">Free Fire Diamantes</button>
+                <button onclick="switchTab('netflix')" class="block w-full text-left py-2.5 px-3 rounded-xl hover:bg-pink-500/10 hover:text-pink-500 transition">Contas Netflix</button>
+                <button onclick="switchTab('bots')" class="block w-full text-left py-2.5 px-3 rounded-xl hover:bg-pink-500/10 hover:text-pink-500 transition">Serviços & Automações</button>
+            </div>
         </div>
-    </header>
+
+        <!-- RODAPÉ DO MENU LATERAL -->
+        <div class="pt-4 border-t border-slate-200 dark:border-gray-800 flex items-center justify-between">
+            <span class="text-xs text-gray-500 dark:text-gray-400">Exibição</span>
+            <button onclick="toggleTheme()" class="px-3 py-1.5 rounded-lg border border-pink-500/30 bg-pink-500/10 text-xs text-pink-500 font-semibold flex items-center gap-2">
+                <i class="fa-solid fa-circle-half-stroke"></i> Tema
+            </button>
+        </div>
+    </div>
 
     <!-- CARROSSEL DE BANNERS -->
     <section class="bg-slate-200/50 dark:bg-[#12141c]/80 py-6 border-b border-pink-500/10">
@@ -123,28 +140,24 @@
             <div class="carousel-container border border-slate-300 dark:border-white/10 bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 shadow-2xl rounded-3xl" id="carousel">
                 <div class="carousel-track" id="carouselTrack">
                     
-                    <!-- Banner 1: Serviços -->
                     <div class="carousel-slide p-6 sm:p-10 flex flex-col justify-center min-h-[180px]">
                         <span class="w-fit px-3 py-1 rounded-full bg-pink-500/20 text-pink-400 text-xs font-bold font-mono border border-pink-500/30 mb-2">ENTREGA INSTANTÂNEA</span>
                         <h2 class="text-xl sm:text-3xl font-black text-white">Serviços Digitais Rápido e Seguro</h2>
                         <p class="text-xs sm:text-sm text-gray-300 mt-2 max-w-xl">Megabytes e serviços enviados com total segurança e suporte direto.</p>
                     </div>
 
-                    <!-- Banner 2: Netflix -->
                     <div class="carousel-slide p-6 sm:p-10 flex flex-col justify-center min-h-[180px] bg-gradient-to-r from-red-950 via-black to-slate-900">
                         <span class="w-fit px-3 py-1 rounded-full bg-red-600/30 text-red-400 text-xs font-bold font-mono border border-red-600/40 mb-2">STREAMING PREMIUM</span>
                         <h2 class="text-xl sm:text-3xl font-black text-white">Perfis Netflix Ultra HD</h2>
                         <p class="text-xs sm:text-sm text-gray-300 mt-2 max-w-xl">Assista aos seus filmes e séries favoritos com conta privada e qualidade máxima.</p>
                     </div>
 
-                    <!-- Banner 3: Free Fire -->
                     <div class="carousel-slide p-6 sm:p-10 flex flex-col justify-center min-h-[180px] bg-gradient-to-r from-amber-950 via-slate-900 to-amber-950">
                         <span class="w-fit px-3 py-1 rounded-full bg-amber-500/20 text-amber-400 text-xs font-bold font-mono border border-amber-500/30 mb-2">GARENA TOPUP</span>
                         <h2 class="text-xl sm:text-3xl font-black text-white">Recargas de Diamantes Free Fire</h2>
                         <p class="text-xs sm:text-sm text-gray-300 mt-2 max-w-xl">Recarregue seus diamantes diretamente na sua ID com envio imediato.</p>
                     </div>
 
-                    <!-- Banner 4: Automação -->
                     <div class="carousel-slide p-6 sm:p-10 flex flex-col justify-center min-h-[180px] bg-gradient-to-r from-emerald-950 via-slate-900 to-emerald-950">
                         <span class="w-fit px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-400 text-xs font-bold font-mono border border-emerald-500/30 mb-2">AUTOMAÇÃO VIP</span>
                         <h2 class="text-xl sm:text-3xl font-black text-white">Sistemas BL4CK BOT & BL4CK X</h2>
@@ -153,7 +166,6 @@
 
                 </div>
                 
-                <!-- Indicadores (Pontos) -->
                 <div class="absolute bottom-3 left-0 right-0 flex justify-center gap-1.5" id="carouselDots"></div>
             </div>
         </div>
@@ -162,10 +174,8 @@
     <!-- ÁREA PRINCIPAL DOS SERVIÇOS -->
     <main class="max-w-7xl mx-auto px-4 py-8 flex-grow w-full">
 
-        <!-- ================= ABA 1: HOME / PÁGINA INICIAL ================= -->
+        <!-- ABA 1: HOME -->
         <section id="tab-home" class="tab-content">
-            
-            <!-- HERO WELCOME -->
             <div class="bg-white dark:bg-gradient-to-r dark:from-pink-900/30 dark:via-[#12141c] dark:to-purple-900/30 border border-slate-200 dark:border-pink-500/20 rounded-3xl p-6 md:p-8 mb-10 shadow-lg dark:shadow-none glow-pink">
                 <span class="text-xs font-mono bg-pink-500/10 dark:bg-pink-500/20 text-pink-600 dark:text-pink-400 px-3 py-1 rounded-full font-bold uppercase tracking-wider">Bem-vindo à BL4CK_SOLUTIONS</span>
                 <h1 class="text-3xl md:text-5xl font-black text-slate-900 dark:text-white mt-4">Sua plataforma oficial de <span class="text-pink-500">Megabytes & Serviços</span></h1>
@@ -175,7 +185,7 @@
                 </div>
             </div>
 
-            <!-- DESTAQUES VODACOM DIÁRIOS E MENSAIS -->
+            <!-- DESTAQUES VODACOM -->
             <div class="mb-10">
                 <div class="flex items-center justify-between mb-4">
                     <h3 class="text-lg font-black text-slate-900 dark:text-white flex items-center gap-2"><i class="fa-solid fa-wifi text-pink-500"></i> Destaques Vodacom Megabytes</h3>
@@ -209,23 +219,20 @@
                 </div>
             </div>
 
-            <!-- RESUMO OUTROS SERVIÇOS -->
+            <!-- OUTROS SERVIÇOS -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <!-- FREE FIRE -->
                 <div class="bg-white dark:bg-[#12141c] border border-slate-200 dark:border-gray-800 rounded-2xl p-5 hover:border-orange-500/40 transition shadow-sm dark:shadow-none">
                     <div class="w-10 h-10 rounded-lg bg-orange-500/20 text-orange-500 flex items-center justify-center text-xl mb-3"><i class="fa-solid fa-fire"></i></div>
                     <h4 class="font-bold text-slate-900 dark:text-white text-base">Free Fire Diamantes</h4>
                     <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Recargas diretas por ID a partir de 75 MT.</p>
                     <button onclick="switchTab('freefire')" class="mt-4 text-xs text-orange-500 font-bold hover:underline">Conferir Tabela →</button>
                 </div>
-                <!-- NETFLIX -->
                 <div class="bg-white dark:bg-[#12141c] border border-slate-200 dark:border-gray-800 rounded-2xl p-5 hover:border-red-600/40 transition shadow-sm dark:shadow-none">
                     <div class="w-10 h-10 rounded-lg bg-red-600/20 text-red-500 flex items-center justify-center text-xl mb-3"><i class="fa-solid fa-tv"></i></div>
                     <h4 class="font-bold text-slate-900 dark:text-white text-base">Contas Netflix Premium</h4>
                     <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Telas privadas 4K por 30 dias a partir de 250 MT.</p>
                     <button onclick="switchTab('netflix')" class="mt-4 text-xs text-red-500 font-bold hover:underline">Ver Telas Disponíveis →</button>
                 </div>
-                <!-- SERVIÇOS DIGITAIS -->
                 <div class="bg-white dark:bg-[#12141c] border border-slate-200 dark:border-gray-800 rounded-2xl p-5 hover:border-emerald-500/40 transition shadow-sm dark:shadow-none">
                     <div class="w-10 h-10 rounded-lg bg-emerald-500/20 text-emerald-500 flex items-center justify-center text-xl mb-3"><i class="fa-solid fa-robot"></i></div>
                     <h4 class="font-bold text-slate-900 dark:text-white text-base">Sistemas & Automação</h4>
@@ -233,10 +240,9 @@
                     <button onclick="switchTab('bots')" class="mt-4 text-xs text-emerald-500 font-bold hover:underline">Saiba Mais →</button>
                 </div>
             </div>
-
         </section>
 
-        <!-- ================= ABA 2: VODACOM ================= -->
+        <!-- ABA 2: VODACOM -->
         <section id="tab-vodacom" class="tab-content hidden">
             <div class="flex items-center gap-3 mb-6">
                 <div class="w-10 h-10 rounded-lg bg-red-600/20 border border-red-500 flex items-center justify-center text-red-500 font-bold text-xl">V</div>
@@ -391,7 +397,7 @@
                 </div>
             </div>
 
-            <!-- PACOTES VODACOM COMBO -->
+            <!-- VODACOM COMBO -->
             <h3 class="text-sm font-bold text-red-600 dark:text-red-500 uppercase tracking-wider mb-3 flex items-center gap-2"><i class="fa-solid fa-phone"></i> Vodacom Combo (Chamadas + SMS Ilimitadas + GB) - 30 Dias</h3>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div class="bg-white dark:bg-[#12141c] border border-red-500/30 rounded-2xl p-4 flex items-center justify-between shadow-sm dark:shadow-none">
@@ -452,7 +458,7 @@
             </div>
         </section>
 
-        <!-- ================= ABA 3: FREE FIRE ================= -->
+        <!-- ABA 3: FREE FIRE -->
         <section id="tab-freefire" class="tab-content hidden">
             <div class="flex items-center gap-3 mb-6">
                 <div class="w-10 h-10 rounded-lg bg-orange-500/20 border border-orange-500 flex items-center justify-center text-orange-500 font-bold text-xl"><i class="fa-solid fa-fire"></i></div>
@@ -484,7 +490,7 @@
             </div>
         </section>
 
-        <!-- ================= ABA 4: NETFLIX ================= -->
+        <!-- ABA 4: NETFLIX -->
         <section id="tab-netflix" class="tab-content hidden">
             <div class="flex items-center gap-3 mb-6">
                 <div class="w-10 h-10 rounded-lg bg-red-600/20 border border-red-600 flex items-center justify-center text-red-500 font-bold text-xl"><i class="fa-solid fa-tv"></i></div>
@@ -510,7 +516,7 @@
             </div>
         </section>
 
-        <!-- ================= ABA 5: SERVIÇOS & AUTOMAÇÕES ================= -->
+        <!-- ABA 5: SERVIÇOS & AUTOMAÇÕES -->
         <section id="tab-bots" class="tab-content hidden">
             <div class="flex items-center gap-3 mb-6">
                 <div class="w-10 h-10 rounded-lg bg-emerald-500/20 border border-emerald-500 flex items-center justify-center text-emerald-500 font-bold text-xl"><i class="fa-solid fa-robot"></i></div>
@@ -521,7 +527,6 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- CARD BL4CK BOT -->
                 <div class="bg-white dark:bg-[#12141c] border border-emerald-500/30 rounded-2xl p-6 glow-pink shadow-sm dark:shadow-none">
                     <div class="flex items-center justify-between mb-3">
                         <span class="text-xs font-mono bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 px-2.5 py-1 rounded-full font-bold">Automação VIP</span>
@@ -537,7 +542,6 @@
                     </div>
                 </div>
 
-                <!-- CARD BL4CK X -->
                 <div class="bg-white dark:bg-[#12141c] border border-purple-500/30 rounded-2xl p-6 shadow-sm dark:shadow-none">
                     <div class="flex items-center justify-between mb-3">
                         <span class="text-xs font-mono bg-purple-500/20 text-purple-600 dark:text-purple-400 px-2.5 py-1 rounded-full font-bold">Edição Especial</span>
@@ -555,7 +559,7 @@
             </div>
         </section>
 
-        <!-- SEÇÃO: POR QUE COMPRAR COM A BL4CK_SOLUTIONS? -->
+        <!-- SEÇÃO: VANTAGENS -->
         <section class="mt-16 pt-10 border-t border-slate-300 dark:border-gray-800">
             <div class="text-center max-w-2xl mx-auto mb-10">
                 <h2 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white">Por que comprar com a <span class="text-pink-500">BL4CK_SOLUTIONS</span>?</h2>
@@ -599,11 +603,9 @@
 
     </main>
 
-    <!-- FOOTER / FALE CONOSCO -->
+    <!-- FOOTER -->
     <footer class="bg-white dark:bg-[#12141c] border-t border-slate-300 dark:border-pink-500/20 py-10 px-4 mt-12 shadow-inner dark:shadow-none">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8 mb-8">
-            
-            <!-- MARCA -->
             <div class="text-center md:text-left">
                 <div class="flex items-center justify-center md:justify-start gap-3 mb-3">
                     <div class="w-8 h-8 rounded-lg bg-pink-500/10 border border-pink-500/30 flex items-center justify-center">
@@ -618,10 +620,7 @@
                 <p class="text-xs text-gray-500 dark:text-gray-400 max-w-sm">Soluções digitais em revenda de megabytes, sistemas e recargas de jogos online.</p>
             </div>
 
-            <!-- REDES SOCIAIS & BOTÃO DE CONTATO DIRETO -->
             <div class="flex flex-col items-center md:items-end gap-4">
-                
-                <!-- ÍCONES DAS REDES SOCIAIS -->
                 <div class="flex items-center gap-3">
                     <span class="text-xs font-semibold text-gray-500 dark:text-gray-400 mr-2">Acompanhe nossas redes:</span>
                     <a href="https://wa.me/258857695766" target="_blank" class="w-9 h-9 rounded-full bg-slate-100 dark:bg-gray-800 border border-slate-300 dark:border-gray-700 flex items-center justify-center text-slate-700 dark:text-gray-300 hover:text-green-500 hover:border-green-500 transition" title="WhatsApp">
@@ -638,18 +637,14 @@
                     </a>
                 </div>
 
-                <!-- BOTÃO FALE CONOSCO NO WHATSAPP -->
                 <div>
                     <a href="https://wa.me/258857695766?text=Ol%C3%A1%2C%20preciso%20de%20suporte%20ou%20informa%C3%A7%C3%B5es" target="_blank" class="inline-flex items-center gap-2 bg-gradient-to-r from-green-600 to-emerald-500 hover:from-green-500 hover:to-emerald-400 text-white px-6 py-3 rounded-xl text-xs font-black shadow-lg shadow-green-900/20 transition transform hover:-translate-y-0.5">
                         <i class="fa-brands fa-whatsapp text-lg"></i> Fale Conosco no WhatsApp
                     </a>
                 </div>
-
             </div>
-
         </div>
 
-        <!-- COPYRIGHT -->
         <div class="max-w-7xl mx-auto pt-6 border-t border-slate-200 dark:border-gray-800 flex flex-col md:flex-row items-center justify-between text-[11px] text-gray-500 dark:text-gray-400">
             <p>&copy; 2026 bl4ck_solutions. Todos os direitos reservados.</p>
             <button onclick="scrollToTop()" class="mt-2 md:mt-0 text-pink-500 hover:underline flex items-center gap-1 font-bold">
@@ -658,9 +653,9 @@
         </div>
     </footer>
 
-    <!-- JAVASCRIPT LOGIC -->
+    <!-- LOGICA JAVASCRIPT -->
     <script>
-        // GERENCIAMENTO DE TEMA (CLARO / ESCURO)
+        // TEMA
         function toggleTheme() {
             const html = document.documentElement;
             if (html.classList.contains('dark')) {
@@ -672,7 +667,6 @@
             }
         }
 
-        // CARREGAR TEMA SALVO OU PREFERÊNCIA DO SISTEMA
         (function initTheme() {
             const savedTheme = localStorage.getItem('theme');
             if (savedTheme) {
@@ -687,18 +681,23 @@
             }
         })();
 
-        // LÓGICA DO CARROSSEL
+        // CARROSSEL
         const track = document.getElementById('carouselTrack');
         const slides = document.querySelectorAll('.carousel-slide');
         const dotsContainer = document.getElementById('carouselDots');
         let currentIndex = 0;
         let startX = 0;
         let isDragging = false;
+        let carouselTimer = null;
 
         slides.forEach((_, i) => {
             const dot = document.createElement('button');
+            dot.setAttribute('aria-label', `Ir para o slide ${i + 1}`);
             dot.className = `w-2 h-2 rounded-full transition-all ${i === 0 ? 'bg-pink-500 w-5' : 'bg-white/30'}`;
-            dot.onclick = () => goToSlide(i);
+            dot.onclick = () => {
+                goToSlide(i);
+                resetCarouselTimer();
+            };
             dotsContainer.appendChild(dot);
         });
 
@@ -715,10 +714,23 @@
             updateDots();
         }
 
+        function startCarouselTimer() {
+            carouselTimer = setInterval(() => {
+                currentIndex = (currentIndex + 1) % slides.length;
+                goToSlide(currentIndex);
+            }, 4500);
+        }
+
+        function resetCarouselTimer() {
+            clearInterval(carouselTimer);
+            startCarouselTimer();
+        }
+
         const carousel = document.getElementById('carousel');
         carousel.addEventListener('touchstart', e => { 
             startX = e.touches[0].clientX; 
             isDragging = true; 
+            clearInterval(carouselTimer);
         });
         
         carousel.addEventListener('touchend', e => {
@@ -729,14 +741,12 @@
             if (diffX > 50 && currentIndex < slides.length - 1) currentIndex++;
             else if (diffX < -50 && currentIndex > 0) currentIndex--;
             goToSlide(currentIndex);
+            startCarouselTimer();
         });
 
-        setInterval(() => {
-            currentIndex = (currentIndex + 1) % slides.length;
-            goToSlide(currentIndex);
-        }, 4500);
+        startCarouselTimer();
 
-        // NAVEGAÇÃO ENTRE ABAS
+        // NAVEGAÇÃO SPA
         function switchTab(tabId, addHistory = true) {
             const tabs = document.querySelectorAll('.tab-content');
             tabs.forEach(tab => tab.classList.add('hidden'));
@@ -746,10 +756,7 @@
                 targetTab.classList.remove('hidden');
             }
 
-            const mobileMenu = document.getElementById('mobileMenu');
-            if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
-                mobileMenu.classList.add('hidden');
-            }
+            closeMobileMenu();
 
             if (addHistory) {
                 history.pushState({ tab: tabId }, '', '#' + tabId);
@@ -779,9 +786,33 @@
             });
         }
 
+        // LÓGICA DO MENU MOBILE OFF-CANVAS
         function toggleMobileMenu() {
-            const mobileMenu = document.getElementById('mobileMenu');
-            mobileMenu.classList.toggle('hidden');
+            const menu = document.getElementById('mobileMenu');
+            const backdrop = document.getElementById('menuBackdrop');
+            const menuBtn = document.getElementById('menuBtn');
+
+            const isOpen = !menu.classList.contains('translate-x-full');
+
+            if (isOpen) {
+                closeMobileMenu();
+            } else {
+                menu.classList.remove('translate-x-full');
+                backdrop.classList.remove('hidden');
+                setTimeout(() => backdrop.classList.remove('opacity-0'), 10);
+                menuBtn.setAttribute('aria-expanded', 'true');
+            }
+        }
+
+        function closeMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            const backdrop = document.getElementById('menuBackdrop');
+            const menuBtn = document.getElementById('menuBtn');
+
+            menu.classList.add('translate-x-full');
+            backdrop.classList.add('opacity-0');
+            setTimeout(() => backdrop.classList.add('hidden'), 300);
+            menuBtn.setAttribute('aria-expanded', 'false');
         }
     </script>
 </body>
